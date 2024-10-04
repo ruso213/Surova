@@ -20,7 +20,9 @@
           {
             "glob": "**/*",
             "input": "apps/Surova/public"
-          }
+          },
+          "apps/Surova/src/assets/icon"
+
         ],
         "styles": ["apps/Surova/src/styles.scss"],
         "scripts": []
