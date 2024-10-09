@@ -14,7 +14,8 @@ module.exports = {
         'white-boneDark':'#D7D5C6',
         'white-low':'#EDEAE3',
         'gray-bone': '#BAB3A1',
-        'green-olive': '#898C72'
+        'green-olive': '#898C72',
+        'dark-olive': '#454931'
       }
     },
   },

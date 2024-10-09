@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'lib-button',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'button[Srvbttn]',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './button.component.html',

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'lib-header',
+  selector: 'lib-letter',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  templateUrl: './letter.component.html',
+  styleUrl: './letter.component.scss',
 })
-export class HeaderComponent {}
+export class LetterComponent {}

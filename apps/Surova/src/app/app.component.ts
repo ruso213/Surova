@@ -6,14 +6,17 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HeaderComponent } from '@surova/ui';
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule, HeaderComponent],
+  imports: [NxWelcomeComponent, RouterModule, HeaderComponent,],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Surova';
-  iconToRegister = []
+  iconToRegister = [
+    "chevronLeft",
+    "chevronRight"
+  ]
 
   constructor(
     private matIconRegistry: MatIconRegistry,
