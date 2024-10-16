@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'lib-letter',
   standalone: true,
@@ -8,4 +9,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './letter.component.html',
   styleUrl: './letter.component.scss',
 })
-export class LetterComponent {}
+export class LetterComponent {
+
+}

@@ -15,7 +15,8 @@ export class AppComponent {
   title = 'Surova';
   iconToRegister = [
     "chevronLeft",
-    "chevronRight"
+    "chevronRight",
+    "search"
   ]
 
   constructor(

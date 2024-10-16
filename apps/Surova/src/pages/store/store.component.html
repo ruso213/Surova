@@ -1,4 +1,114 @@
-<div class=" w-[100vw] h-[500px] bg-gradient-to-r from-green-olive to-dark-olive to-90% ">
-    <lib-carousel [letters]="[1,2,3,4,5,6,7,8]">
-    </lib-carousel>
+
+<div class="w-full">
+    <lib-header></lib-header>
+    <div class=" w-full h-[500px] bg-gradient-to-r bg-gray-dark  to-70% ">
+        <lib-carousel>
+        @for (a of i; track a) {
+            <ng-template libItemCarousel>
+                <lib-letter>
+                <div class="flex w-full h-full">
+                        <div class="w-full flex items-center">
+                            <img 
+                            class="w-full  rounded-md"
+                            src="https://nueva-logica.s3.us-east-2.amazonaws.com/productos/2359/jKhP42iidoo5J1lug1J0Eo73WSCXqgtz84CxrTdE.webp" alt="">
+                        </div>
+                        <div class="flex flex-col w-full  py-4 px-2">
+                            <h1 class="text-xl">
+                                Product Name
+                            </h1>
+                            <div class="">
+                            </div>
+                            <div class="">
+                            </div>
+                        </div>
+                    </div>
+                </lib-letter>
+            </ng-template>
+        }
+        </lib-carousel>  
+    </div>     
+    <div class=" bg-white-low  max-h-screen ">
+        <div class="flex flex-row  gap-10 h-screen">
+            <div class="w-2/12  flex flex-col gap-4 shadow-md py-10">
+                <div class="flex flex-col items-center justify-center gap-3">
+                    <p class="font-semibold text-xl">Todos los Filtros</p>
+                    <button class="py-3 px-7 border-solid border-2 border-black rounded-full  hover:bg-black/5"> Borrar filtros </button>
+                </div>
+                <div class="flex gap-6 flex-col">
+                    <div class=" px-7">
+                        <h1 class="text-4xl">Productos</h1>
+                        <div class=" ">
+                            <div>
+                                <p>Precio</p>
+                                <div class="h-5 w-5 border border-solid border-black"></div>
+                            </div>
+                            <div>
+                                <p>Estrellas</p>
+                                <div class="h-5 w-5 border border-solid border-black"></div>
+                            </div>
+                            <div>
+                                <p>Promocion</p>
+                                <div class="h-5 w-5 border border-solid border-black"></div>
+                            </div>
+                            <div>
+                                <p>Precio</p>
+                                <div class="h-5 w-5 border border-solid border-black"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" px-7">
+                        <h1 class="text-3xl">Caracteristicas</h1>
+                        <div class="w-full ">
+                            <div>
+                                <p>Cocina</p>
+                                <div class="h-5 w-5 border border-solid border-black"></div>
+                            </div>
+                            <div>
+                                <p>Energia</p>
+                                <div class="h-5 w-5 border border-solid border-black"></div>
+                            </div>
+                            <div>
+                                <p>Juegos</p>
+                                <div class="h-5 w-5 border border-solid border-black"></div>
+                            </div>
+                            <div>
+                                <p>Infantiles</p>
+                                <div class="h-5 w-5 border border-solid border-black"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col w-full max-h-full gap-6  pt-10  ">
+                <div class="ml-7  h-12 grid grid-cols-12">
+                    <lib-input  class="col-span-9 shadow-perso rounded-full h-2">
+                        <div srvPreffix class="w-10 flex items-center justify-center">
+                            <mat-icon>search</mat-icon>
+                        </div>
+                        <div srvSuffix class="w-28 cursor-pointer bg-black h-full  rounded-r-full flex items-center justify-center">
+                            <mat-icon class="text-white scale-125">search</mat-icon>
+                        </div>
+                    </lib-input>
+                    <div class="col-span-3 flex flex-col items-center justify-center">
+                        <button class="py-3 px-3 border-solid border-2 border-black rounded-full  hover:bg-black/5 flex justify-center items-center gap-3"> 
+                            <p>Perfil</p>
+                            <mat-icon> person</mat-icon>    
+                        </button>
+                    </div>
+                </div>
+
+                <div class=" w-full overflow-scroll pr-8 ">
+                    <div class="grid grid-cols-4 gap-4 py-2">
+                        @for (item of [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,9,1,2,3]; track $index) {
+                            <div class="col-span-1 h-80 w-full bg-gray-notlow shadow-lg rounded-lg duration-300 hover:-translate-y-1 cursor-pointer">
+                                {{item}}
+                            </div>
+                        }
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </div>
 </div>

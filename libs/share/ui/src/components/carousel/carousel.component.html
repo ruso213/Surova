@@ -1,28 +1,8 @@
-<div class="relative overflow-x-hidden  flex w-full h-full  items-center justify-center ">
+<div class="relative overflow-x-hidden   flex w-full h-full  items-center justify-center ">
     <div class="carousel absolute flex w-full h-full items-center justify-start ">
-        @for (item of letters; track $index) {
-            <div class="w-full h-full flex items-center justify-start mx-[25vw]">
-                <lib-letter>
-                    <div class="flex w-full h-full">
-                        <div class="w-full">
-                            <img 
-                            class="w-full h-full rounded-md"
-                            src="https://www.costco.com.mx/medias/sys_master/products/h84/ha0/116362457972766.jpg" alt="">
-                        </div>
-                        <div class="flex flex-col w-full  py-4 px-2">
-                            <h1 class="font-light text-xl">
-                                Product Name
-                            </h1>
-                            <div class="">
-
-                            </div>
-                            <div class="">
-
-                            </div>
-                        </div>
-                    </div>
-                </lib-letter>
-            </div>
+        @for (letter of letter?.toArray(); track $index) {
+                <ng-container [ngTemplateOutlet]="letter.template" >
+                </ng-container>
         }
     </div>
     
@@ -36,13 +16,13 @@
         }       
     </div>
 
-    <div class="absolute top-[92%] flex gap-3 ">
-        @for (item of letters; track $index) {
+    <div class="absolute top-[96%] flex gap-3 ">
+        @for (item of letter; track $index) {
             <button (click)="moveTo($index)" 
             [class.pointer]="$index === position" 
-            class="bg-white/20 cursor-pointer rounded-full w-4 h-4">
+            class="bg-white/20 cursor-pointer rounded-full w-5 h-2 ">
                 
             </button>
         }
-    </div>
+    </div>  
 </div>

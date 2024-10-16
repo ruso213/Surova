@@ -10,12 +10,17 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'white-bone':'#F0EDDE',
-        'white-boneDark':'#D7D5C6',
-        'white-low':'#EDEAE3',
-        'gray-bone': '#BAB3A1',
-        'green-olive': '#898C72',
-        'dark-olive': '#454931'
+        'dark': '#222326',
+        'white-low': '#F9F9F9',
+        'gray-low': '#BFBFBF',
+        'gray-notlow': '#e2e6e6',
+        'gray-medium': '#e5e5e5',
+        'gray-dark': '#A6A6A6',
+        'gray-hiperdark': '#595959',
+        'gray-brawn': '#BBB9B5',
+      },
+      boxShadow:{
+        'perso': '4px 4px 7px 3px rgba(0, 0, 0, 0.1);'
       }
     },
   },
