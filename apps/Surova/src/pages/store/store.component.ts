@@ -19,5 +19,5 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './store.component.scss',
 })
 export class StoreComponent {
-  i = [0,1,0,0,0]
+  i = [0,1,0,0,0,1]
 }

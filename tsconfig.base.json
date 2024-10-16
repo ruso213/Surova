@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@surova/ui": ["libs/share/ui/src/index.ts"]
+      "@surova/ui": ["libs/share/ui/src/index.ts"],
+      "@surova/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
