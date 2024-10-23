@@ -1,0 +1,14 @@
+<div class="flex items-center gap-1">
+    <div class="relative">
+        @for (item of stars; track $index) {
+            <mat-icon
+            [ngStyle]="{'--star-width': item+'%'}"
+            [class.text-yellow-500]="item === 100"
+            [class.backfill-icon]="item < 100"
+            >
+                star
+            </mat-icon>
+        }
+    </div>
+    <span class="flex items-end text-blue-500 hover:underline cursor-pointer text-sm">{{rating()}}</span>
+</div>

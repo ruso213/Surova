@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CarouselComponent, HeaderComponent, InputComponent, LetterComponent, letterDirective } from '@surova/ui';
+import { CarouselComponent, HeaderComponent, InputComponent, ProductLetterComponent, letterDirective } from '@surova/ui';
 import { MatIconModule } from '@angular/material/icon';
+import { Product, StoreService } from '@surova/utils';
 
 @Component({
   selector: 'app-store',
@@ -10,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule, 
     CarouselComponent,
     letterDirective,
-    LetterComponent,
+    ProductLetterComponent,
     HeaderComponent, 
     InputComponent,
     MatIconModule,
@@ -18,6 +19,16 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './store.component.html',
   styleUrl: './store.component.scss',
 })
-export class StoreComponent {
-  i = [0,1,0,0,0,1]
+export class StoreComponent implements OnInit{
+  constructor(
+    private storeService :StoreService
+  ){}
+
+  products : Product[]=[]
+  ngOnInit(): void {
+    this.storeService.getProducts().then(()=>{
+      this.products = this.storeService.products
+    })
+      
+  }
 }

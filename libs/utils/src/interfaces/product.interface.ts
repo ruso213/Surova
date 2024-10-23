@@ -10,10 +10,12 @@ export interface Product {
     description: string;  // Descripción del producto
     variants: Variant[];  // Variantes (tamaños, colores, etc.)
     sku: string;          // SKU (código identificador del producto)
+    categories:string[]
     relatedProducts?: string[];  // IDs o nombres de productos relacionados (opcional)
     shippingDetails: Shipping;   // Información de envío
     returnPolicy: string;        // Política de devoluciones
     tags?: string[];             // Tags o categorías del producto (opcional)
+    brand:string
   }
 export  interface Review {
     userName: string;     // Nombre del usuario que dejó la reseña

@@ -1,5 +1,6 @@
 export * from './header/header.component'
 export * from './button/button.component'
-export * from './letter/letter.component'
+export * from './productLetter/productLetter.component'
 export * from './carousel/carousel.component'
 export * from './input/input.component'
+export * from './rating/rating.component'

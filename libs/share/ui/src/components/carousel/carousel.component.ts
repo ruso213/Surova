@@ -1,7 +1,6 @@
 import { AfterContentInit, Component,ContentChildren,Directive, QueryList, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule} from '@angular/material/icon';
-import { LetterComponent } from '../letter/letter.component';
 
 @Directive({selector:'[libItemCarousel]', standalone: true}) //nombre de uso de la direciva
 export class letterDirective{
@@ -12,7 +11,7 @@ export class letterDirective{
 @Component({
   selector: 'lib-carousel',
   standalone: true,
-  imports: [CommonModule, LetterComponent,MatIconModule ],
+  imports: [CommonModule,MatIconModule ],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
