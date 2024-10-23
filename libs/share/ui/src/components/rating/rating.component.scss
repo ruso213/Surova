@@ -1,15 +1,14 @@
 .backfill-icon {
     position: relative;
-    color: black; /* Color base del ícono */
   }
   
 .backfill-icon::before {
-    content: 'star'; /* Copia del icono */
+    content: 'star'; 
     position: absolute;
     top: 0;
     left: 0;
     overflow: hidden;
-    color: #eab308; /* Color del relleno */
+    color: #eab308; 
     width: var(--star-width);
     z-index: 1;
 }

@@ -22,12 +22,18 @@ export class RatingComponent implements OnInit{
     const rati= this.rating()
     let surplus = 0
     if (rati) {
-      for (let i = 1; i < rati; i++) {
-        surplus =i
-        this.stars.push(100)
+      let index = 1; 
+      while (index < rati) {
+          surplus = index;
+          this.stars.push(100);
+          index++; 
       }
       surplus = (rati - surplus)*100
       this.stars.push(surplus)
+      while(this.stars.length < 5){
+        console.log(this.stars);
+        this.stars.push(0)
+      }
     }
   }
 }
