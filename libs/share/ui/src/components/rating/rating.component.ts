@@ -14,8 +14,11 @@ export class RatingComponent implements OnInit{
 
   ngOnInit(): void {
     this.checkRaiting()
+    console.log(this.size);
+    
   }
   rating  = input<number>()
+  size  = input<number>()
   stars: number[] = []
 
   checkRaiting(){

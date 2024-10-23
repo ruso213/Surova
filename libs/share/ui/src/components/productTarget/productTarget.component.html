@@ -1,0 +1,23 @@
+<div class="z-10 col-span-1 p-5 h-80 w-full bg-white shadow-lg rounded-md duration-300 hover:-translate-y-1 cursor-pointer">
+    <div class="h-3/5 bg-white flex items-center p-3" >
+        <img [src]="product()?.imageUrls![0]" alt="">
+    </div>
+    <div class="flex flex-col items-start">
+        <div class="flex flex-col gap-2 w-full">
+            <div class="flex flex-row items-center">
+                <p class="text-xs text-blue-400 hover:underline">Marca: {{product()?.brand}} </p>
+            </div>
+            <div class="flex flex-col  items-start w-full">
+                <p class="">{{product()?.productName}} </p>
+                <lib-rating [size]="1.2" [rating]="product()?.rating"></lib-rating>
+                <div class="flex flow-row items-center justify-between w-full">
+                    <div class="flex">
+                        <span class="text-sm">$</span>
+                        <span class="text-lg">{{product()?.price}}</span>
+                    </div>
+                    <button class="  px-4 py-1 bg-orange-500 hover:bg-orange-600 text-white text-md rounded-sm">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

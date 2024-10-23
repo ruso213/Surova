@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CarouselComponent, HeaderComponent, InputComponent, ProductLetterComponent, letterDirective } from '@surova/ui';
+import { CarouselComponent, HeaderComponent, InputComponent, ProductLetterComponent, ProductTargetComponent, letterDirective } from '@surova/ui';
 import { MatIconModule } from '@angular/material/icon';
 import { Product, StoreService } from '@surova/utils';
 
@@ -15,6 +15,7 @@ import { Product, StoreService } from '@surova/utils';
     HeaderComponent, 
     InputComponent,
     MatIconModule,
+    ProductTargetComponent
   ],
   templateUrl: './store.component.html',
   styleUrl: './store.component.scss',

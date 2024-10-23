@@ -12,4 +12,8 @@
     width: var(--star-width);
     z-index: 1;
 }
-  
+.size{
+    font-size: var(--star-size);
+    width: fit-content !important;
+    height: fit-content !important;
+}

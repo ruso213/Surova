@@ -2,7 +2,11 @@
     <div class="relative">
         @for (item of stars; track $index) {
             <mat-icon
-            [ngStyle]="{'--star-width': item+'%'}"
+            class="size"
+            [ngStyle]="{
+                '--star-width': item+'%',
+                '--star-size': size() + 'rem'
+            }"
             [class.text-yellow-500]="item === 100"
             [class.backfill-icon]="item < 100"
             >
