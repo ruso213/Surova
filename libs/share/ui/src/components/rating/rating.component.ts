@@ -13,9 +13,7 @@ export class RatingComponent implements OnInit{
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.checkRaiting()
-    console.log(this.size);
-    
+    this.checkRaiting()    
   }
   rating  = input<number>()
   size  = input<number>()
@@ -34,7 +32,6 @@ export class RatingComponent implements OnInit{
       surplus = (rati - surplus)*100
       this.stars.push(surplus)
       while(this.stars.length < 5){
-        console.log(this.stars);
         this.stars.push(0)
       }
     }

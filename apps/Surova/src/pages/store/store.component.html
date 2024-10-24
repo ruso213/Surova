@@ -14,54 +14,17 @@
     </div>     
     <div class=" bg-white-low   ">
         <div class="flex flex-row   ">
-            <div class="w-2/12 h-screen sticky top-0  flex flex-col gap-4 shadow-md py-10">
-                <div class="flex flex-col items-center justify-center gap-3">
-                    <p class="font-semibold text-xl">Todos los Filtros</p>
-                    <button class="py-3 px-7 border-solid border-2 border-black rounded-full  hover:bg-black/5"> Borrar filtros </button>
-                </div>
-                <div class="flex gap-6 flex-col">
-                    <div class=" px-7">
-                        <h1 class="text-4xl">Productos</h1>
-                        <div class=" ">
+            <div class="w-3/12 h-screen sticky top-0  flex flex-col gap-4 shadow-md py-32 ">
+                <div class="mx-6">
+                    <p class="text-2xl">{{caracteristic.caracteristicnNme}}</p>
+                        @for (item of caracteristic.caracteristics; track $index) {
+                            <p>{{item.name}}</p>
                             <div>
-                                <p>Precio</p>
-                                <div class="h-5 w-5 border border-solid border-black"></div>
+                                @for (option of item.options; track $index) {
+                                    <lib-custom-checkbox (clickInput)="filter($event)" [option]="option"></lib-custom-checkbox>
+                                }
                             </div>
-                            <div>
-                                <p>Estrellas</p>
-                                <div class="h-5 w-5 border border-solid border-black"></div>
-                            </div>
-                            <div>
-                                <p>Promocion</p>
-                                <div class="h-5 w-5 border border-solid border-black"></div>
-                            </div>
-                            <div>
-                                <p>Precio</p>
-                                <div class="h-5 w-5 border border-solid border-black"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" px-7">
-                        <h1 class="text-3xl">Caracteristicas</h1>
-                        <div class="w-full ">
-                            <div>
-                                <p>Cocina</p>
-                                <div class="h-5 w-5 border border-solid border-black"></div>
-                            </div>
-                            <div>
-                                <p>Energia</p>
-                                <div class="h-5 w-5 border border-solid border-black"></div>
-                            </div>
-                            <div>
-                                <p>Juegos</p>
-                                <div class="h-5 w-5 border border-solid border-black"></div>
-                            </div>
-                            <div>
-                                <p>Infantiles</p>
-                                <div class="h-5 w-5 border border-solid border-black"></div>
-                            </div>
-                        </div>
-                    </div>
+                        }
                 </div>
             </div>
 

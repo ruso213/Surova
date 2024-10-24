@@ -28,7 +28,6 @@ export class CarouselComponent implements AfterContentInit{
   position = 0;
   moveLetter(side:string){
     const slider = document.querySelector<HTMLElement>('.carousel')
-    console.log(this.percentage);
     
     if (slider) {
       this.position = side === 'chevronRight'

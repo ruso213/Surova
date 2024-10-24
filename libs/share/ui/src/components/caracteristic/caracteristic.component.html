@@ -1,0 +1,28 @@
+<div class="flex flex-col gap-3">
+    @for (caracteristic of caracteristics(); track $index) {
+        <div>
+            <div>
+                <span class="font-normal">{{caracteristic.name}}</span>
+            </div>
+            <div class="ml-4">
+                @for (option of caracteristic.options; track $index) {
+                    <div class="custom-checkbox flex gap-3 items-center content-center text-md">    
+                        <input 
+                        onKeyPress
+                        type="checkbox"  
+                        (click)="toggleCheckbox(option)" 
+                        [formControl]="control" 
+                        [id]="option" 
+                        [value]="option">
+                        <label [for]="option">
+                            <mat-icon class="size" >check</mat-icon> <!-- Icono que aparece si está chequeado -->
+                            <span>
+                                {{option}}
+                            </span>
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
