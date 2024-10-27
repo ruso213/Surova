@@ -1,0 +1,31 @@
+<div class="w-full overflow-y-scroll h-screen sticky top-0  flex flex-col justify-center gap-4 shadow-md px-4  ">
+    <div class="flex flex-col pb-4 border-b ">
+        <p class="text-2xl font-normal">Categorias</p>
+        <div class="min-h-6 text-lg  py-2">
+            @for (category of principalCategories; track $index) {
+                <button (click)="categoryLink(category)" [class.active]="" class="w-full flex items-start hover:bg-black/10 px-2 py-1">{{category}}</button>
+            }
+        </div>
+        <button class="py-2 px-3 bg-black/5 hover:bg-black/10">Borrar Categorias</button>
+    </div>
+    <div class="flex flex-col gap-3">
+        <p class="text-2xl font-normal">Filtros</p>
+        <div class="mx-4 flex flex-col gap-2">
+            @for (item of filter ; track $index) {
+                <div>
+                    <div class="flex flex-row justify-between hover:cursor-pointer">
+                        <p>{{item.text}}</p> 
+                        <mat-icon class="icon">keyboard_arrow_down</mat-icon>
+                    </div>
+                    <div class="mx-2">
+                        @for (option of item.options; track $index) {
+                            <lib-custom-checkbox (clickInput)="filterFn(item.id, $event)" [option]="option"></lib-custom-checkbox>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="py-2 px-3 bg-black/5 hover:bg-black/10 my-4">Borrar Filtros</button>
+    </div>
+</div>
+

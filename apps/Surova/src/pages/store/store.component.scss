@@ -1,0 +1,10 @@
+.icon{
+    height: fit-content !important;
+    width: fit-content !important;
+    transform:rotatex(180deg) rotateY(180deg); /* Gira el elemento 180 grados en el eje Y */
+
+    &.iconTouched{
+        transform:rotatex(0deg) rotateY(0deg); /* Gira el elemento 180 grados en el eje Y */
+    }
+}
+

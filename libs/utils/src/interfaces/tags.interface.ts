@@ -1,9 +1,8 @@
-export interface Tags{
-    caracteristicnNme: string
-    caracteristics: Filters[]
-}
+import { Filt } from "../enums";
+
 
 export interface Filters{
-    name:string
+    id:Filt
+    text:string
     options:string[];
 }

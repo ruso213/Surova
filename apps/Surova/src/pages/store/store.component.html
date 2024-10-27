@@ -14,19 +14,8 @@
     </div>     
     <div class=" bg-white-low   ">
         <div class="flex flex-row   ">
-            <div class="w-3/12 h-screen sticky top-0  flex flex-col gap-4 shadow-md py-32 ">
-                <div class="mx-6">
-                    <p class="text-2xl">{{caracteristic.caracteristicnNme}}</p>
-                        @for (item of caracteristic.caracteristics; track $index) {
-                            <p>{{item.name}}</p>
-                            <div>
-                                @for (option of item.options; track $index) {
-                                    <lib-custom-checkbox (clickInput)="filter($event)" [option]="option"></lib-custom-checkbox>
-                                }
-                            </div>
-                        }
-                </div>
-            </div>
+            <lib-filter-list >
+            </lib-filter-list>
 
             <div class="flex flex-col w-full  gap-6   ">
                 <div class="px-7 py-16 bg-white-low shadow-bottom h-12 grid grid-cols-12 sticky top-0 z-20">

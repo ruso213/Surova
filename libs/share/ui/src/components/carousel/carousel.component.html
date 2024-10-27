@@ -10,7 +10,7 @@
         @for (item of ["chevronLeft","chevronRight"]; track $index) {
             <button 
             class="flex  justify-center px-1 py-9 bg-slate-100/20 hover:bg-slate-100/30 cursor-pointer"
-            (click)="moveLetter(item)">
+            (click)="clickRow(item)">
                 <mat-icon [svgIcon]="item"></mat-icon>
             </button>
         }       

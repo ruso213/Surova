@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
   ]
 })
 export class CustomCheckboxComponent implements ControlValueAccessor{
-  option = input<string>('');
+  option = input();
   control = new FormControl();
   @Output() clickInput = new EventEmitter<string>()
   private onChange : (value: string) => void=()=>{return};
@@ -38,9 +38,11 @@ export class CustomCheckboxComponent implements ControlValueAccessor{
   setDisabledState?(isDisabled: boolean): void {
     throw isDisabled
   }
-  toggleCheckbox(value:string): void {
+  toggleCheckbox(value:any): void {
     this.onChange(value);  
     this.onTouched();          
+    console.log(value);
+    
     this.clickInput.emit(value)
     
   }
