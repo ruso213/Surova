@@ -1,1 +1,19 @@
-<p>slider works!</p>
+<div class=" w-full">
+    <div class="w-full flex flex-row justify-between hover:cursor-pointer">
+            <p>{{sliderOptions()?.text}}</p> 
+            <mat-icon class="icon">keyboard_arrow_down</mat-icon>
+    </div>
+    <div class="w-full">
+        <mat-slider [step]="step()" [min]="sliderOptions()?.range![0]" [max]="sliderOptions()?.range![1]">
+                <input
+                [value]="sliderOptions()?.range![0]" matSliderStartThumb
+                (input)="onStartThumbChange($event.target)">
+                <input 
+                (input)="onEndThumbChange($event.target)" 
+                [value]="sliderOptions()?.range![1]" matSliderEndThumb>
+        </mat-slider>
+        
+        <p>{{range[0]?? sliderOptions()?.range![0]}} - {{range[1] ?? sliderOptions()?.range![1]}}</p>
+        
+    </div>
+</div>

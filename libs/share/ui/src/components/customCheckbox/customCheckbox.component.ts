@@ -41,7 +41,6 @@ export class CustomCheckboxComponent implements ControlValueAccessor{
   toggleCheckbox(value:any): void {
     this.onChange(value);  
     this.onTouched();          
-    console.log(value);
     
     this.clickInput.emit(value)
     

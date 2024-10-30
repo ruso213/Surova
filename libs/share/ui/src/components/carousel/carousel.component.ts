@@ -46,7 +46,6 @@ export class CarouselComponent implements AfterContentInit{
           break;
         case 'chevronLeft':
           if(this.position > 0){
-            console.log(this.position);
             this.position = this.position - 1
           }else{
             this.position = this.letter.length -1

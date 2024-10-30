@@ -3,7 +3,7 @@
     <lib-header></lib-header>
     <div class=" w-full h-[500px]  bg-gradient-to-r bg-gray-dark  to-70% ">
         <lib-carousel>
-        @for (product of products; track product) {
+        @for (product of carouselProducts; track product) {
             <ng-template libItemCarousel>
                 <lib-product-letter [product]="product">
             
@@ -13,22 +13,26 @@
         </lib-carousel>  
     </div>     
     <div class=" bg-white-low   ">
-        <div class="flex flex-row   ">
+        <div class="flex flex-row w-full  ">
             <lib-filter-list >
+                @for (item of filters; track $index) {
+                    <lib-slider  (emitRange)="filterFn($event)" [step]="item.step" [sliderOptions]="item"></lib-slider>
+                }
+                <button Srvbttn typeBttn="shadow" (click)="filterProducts()">Filtrar</button>
             </lib-filter-list>
 
-            <div class="flex flex-col w-full  gap-6   ">
-                <div class="px-7 py-16 bg-white-low shadow-bottom h-12 grid grid-cols-12 sticky top-0 z-20">
-                    <lib-input  class="col-span-9 shadow-perso rounded-full h-2">
+            <div class="flex flex-col h-full w-full  gap-6   ">
+                <div class="px-7 py-16   bg-white-low shadow-bottom h-12 grid grid-cols-12 sticky top-0 z-20">
+                    <lib-input  class="col-span-9 shadow-perso rounded-full h-6 relative -top-5">
                         <div srvPreffix class="w-10 flex items-center justify-center">
                             <mat-icon>search</mat-icon>
                         </div>
-                        <div srvSuffix class="w-28 cursor-pointer bg-black h-full  rounded-r-full flex items-center justify-center">
+                        <button srvSuffix class="w-28 cursor-pointer bg-black h-full  rounded-r-full flex items-center justify-center">
                             <mat-icon class="text-white scale-125">search</mat-icon>
-                        </div>
+                        </button>
                     </lib-input>
-                    <div class="col-span-3 flex flex-col items-center justify-center">
-                        <button class="py-3 px-3 border-solid border-2 border-black rounded-full  hover:bg-black/5 flex justify-center items-center gap-3"> 
+                    <div class="col-span-3 flex flex-col items-center justify-center relative -top-5">
+                        <button Srvbttn typeBttn="stroke"> 
                             <p>Perfil</p>
                             <mat-icon> person</mat-icon>    
                         </button>
@@ -37,7 +41,7 @@
 
                 <div class=" w-full pl-4 lg:pr-8"> <!-- //a -->
                     <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-4 py-2">
-                        @for (item of products; track $index) {
+                        @for (item of storeProducts; track $index) {
                             <lib-product-target [product]="item"></lib-product-target>
                         }
                     </div>

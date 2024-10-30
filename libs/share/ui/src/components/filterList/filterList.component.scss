@@ -1,3 +1,16 @@
 :host{
     width: 25%;
 }
+
+::-webkit-scrollbar{
+    width: .5rem;    
+}
+
+::-webkit-scrollbar-track {
+    opacity: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0000001d; /* Color del pulgar (thumb) */
+    border-radius: 10px; /* Bordes redondeados del pulgar */
+  }

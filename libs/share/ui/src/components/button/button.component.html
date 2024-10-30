@@ -1,3 +1,9 @@
-<div class="hover:bg-black/5 px-3 py-2 h-full flex justify-center items-center ">
+<button
+[class.stroke]="typeBttn() == 'stroke'" 
+[class.none]="typeBttn() == 'none'" 
+[class.shadow]="typeBttn() == 'shadow'" 
+[class.filled]="typeBttn() == 'filled'" 
+[class.buy]="typeBttn() == 'buy'" 
+ class="px-3">
     <ng-content></ng-content>
-</div>
+</button>

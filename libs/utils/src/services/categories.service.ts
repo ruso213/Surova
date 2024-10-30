@@ -18,7 +18,4 @@ export class CategoriesService {
     return categoryList
   }
 
-  async filterByFilters(){
-    
-  }
 }
