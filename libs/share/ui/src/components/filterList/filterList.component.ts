@@ -30,9 +30,10 @@ export class FilterListComponent implements OnInit{
   categoryLink(link:string){
     this.route.navigate(['category'],{queryParams:[link]})
   }
-  
+
   deleteFilters(){
     this.route.navigate(['home'])
-
   }
+
+  
 }

@@ -6,17 +6,15 @@
                 <button (click)="categoryLink(category)" [class.active]="" class="w-full flex items-start hover:bg-black/10 px-2 py-1">{{category}}</button>
             }
         </div>
-        <button Srvbttn typeBttn="shadow" >Borrar Categorias</button>
     </div>
     <div class="flex flex-col gap-5 ">
         <div class="border-b ">
             <p class="text-2xl font-normal">Filtros</p>
             <div class="mb-4 mx-4 flex flex-col gap-2 ">
                 <ng-content ></ng-content>
-                
             </div>
         </div>
-        <button Srvbttn typeBttn="shadow" (click)="deleteFilters()">Borrar Filtros</button>
+        <button Srvbttn typeBttn="shadow" (click)="deleteFilters()">Volver al inicio</button>
     </div>
 </div>
 
