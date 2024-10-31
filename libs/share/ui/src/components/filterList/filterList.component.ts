@@ -1,9 +1,9 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { CategoriesService, Filters,  } from '@surova/utils';
+import { CategoriesService } from '@surova/utils';
 import { CustomCheckboxComponent } from '../customCheckbox/customCheckbox.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SliderComponent } from '../slider/slider.component';
 import { ButtonComponent } from '../button/button.component';
 
@@ -15,25 +15,22 @@ import { ButtonComponent } from '../button/button.component';
   styleUrl: './filterList.component.scss',
 })
 export class FilterListComponent implements OnInit{
+  categoryService = inject(CategoriesService)
+  route= inject(Router)
+  principalCategories:string[] = []
+
   ngOnInit(): void {
     this.categoryService.getProductCategories().then(i => 
       i.forEach(category =>         
         this.principalCategories.push(category)
+
     ))
   }
 
-  categoryService = inject(CategoriesService)
-  activeRoute = inject(ActivatedRoute)
-  route= inject(Router)
-  item = input<Filters>()
-  principalCategories:string[] = []
-
-  filterList: string[]=[]
-
-  
   categoryLink(link:string){
     this.route.navigate(['category'],{queryParams:[link]})
   }
+  
   deleteFilters(){
     this.route.navigate(['home'])
 

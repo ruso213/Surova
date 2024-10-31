@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, query, getDocs, where } from '@angular/fire/firestore';
+import { Firestore, collection, query, getDocs } from '@angular/fire/firestore';
 import { Product } from '../interfaces/product.interface';
 import { Filt } from '../enums';
 import { FiltType } from '../interfaces';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
+  private readonly products = new BehaviorSubject<Product[]>([]);
+  Products$ = this.products.asObservable()
+  
   constructor(private readonly db: Firestore) {}
-  products: Product[] = [];
 
   getProducts() {
-    this.products = [];
     const collectionRef = collection(this.db, 'products');
     const q = query(collectionRef);
     const querySnapshot = getDocs(q);
     querySnapshot.then((i) => {
+      const productsList: Product[] = []
       i.forEach((item) => {
-        this.products.push({ ...(item.data() as Product) });
+        productsList.push(item.data() as Product)
       });
+      this.products.next(productsList)
     });
     return querySnapshot;
   }
 
-  getProductWfilter(filter: FiltType[], products: Product[]) {
-    let filterProducts = [...products];    
+  getProductWfilter(filter: FiltType[],products:Product[] ) {
+    let filterProducts = products   
     
     filter.forEach((item) => {
       switch (item.id) {
@@ -40,7 +44,7 @@ export class StoreService {
           });
           return;
         case Filt.INsTOCK:
-          filterProducts = filterProducts.filter((i) => i.inStock == true);
+          filterProducts = filterProducts.filter((i) => i.inStock);
           return;
       }
     });
@@ -48,9 +52,7 @@ export class StoreService {
   }
 
   getOnlyCategoryProducts(category: string){
-    const collectionRef= collection(this.db, 'products')
-    const q = query(collectionRef, where('principalCategory', '==', category))
-    const querySnapshot = getDocs(q) 
-    return querySnapshot
+    const productOfCategory = this.products.getValue().filter(i => i.principalCategory == category)
+    return productOfCategory    
   }
 }

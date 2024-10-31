@@ -16,7 +16,8 @@ export class AppComponent {
   iconToRegister = [
     "chevronLeft",
     "chevronRight",
-    "search"
+    "search",
+    "progressActivity"
   ]
 
   constructor(

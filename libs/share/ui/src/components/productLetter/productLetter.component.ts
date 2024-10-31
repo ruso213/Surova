@@ -14,5 +14,4 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class ProductLetterComponent {
     product = input<Product>()
-
 }

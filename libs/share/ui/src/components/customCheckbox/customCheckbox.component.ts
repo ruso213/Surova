@@ -23,8 +23,8 @@ export class CustomCheckboxComponent implements ControlValueAccessor{
   control = new FormControl();
   @Output() clickInput = new EventEmitter<string>()
   private onChange : (value: string) => void=()=>{return};
-  
   private onTouched : ()=>void=()=>{return};
+  
   writeValue(obj: any): void {
     this.control.setValue(obj)
   }
@@ -41,7 +41,6 @@ export class CustomCheckboxComponent implements ControlValueAccessor{
   toggleCheckbox(value:any): void {
     this.onChange(value);  
     this.onTouched();          
-    
     this.clickInput.emit(value)
     
   }

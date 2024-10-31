@@ -13,8 +13,6 @@ import { Filters } from '@surova/utils';
   styleUrl: './slider.component.scss',
 })
 export class SliderComponent {
- 
-
   sliderOptions = input<Filters>()
   step = input<number>()
   range:number[] = []
@@ -24,8 +22,6 @@ export class SliderComponent {
     this.range[0]= Number(evt.value)
     const options = this.sliderOptions()
     if(!this.range[1] && options ) this.range[1] = options?.range[1]
-    console.log(this.range);
-
     if (options) {
       this.emitRange.emit({
         id:options.id,
@@ -38,9 +34,6 @@ export class SliderComponent {
     this.range[1]= Number(evt.value) 
     const options = this.sliderOptions()
     if (!this.range[0]) this.range[0] = options?.range[0] as number
-    console.log(this.range);
-    
-    
     if (options) {
       this.emitRange.emit({
         id:options.id,

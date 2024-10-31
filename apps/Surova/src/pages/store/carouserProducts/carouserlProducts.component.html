@@ -1,0 +1,11 @@
+<div class=" w-full h-[500px]  bg-gradient-to-r bg-gray-dark  to-70% ">
+    <lib-carousel>
+    @for (product of carouselProducts; track product) {
+        <ng-template libItemCarousel>
+            <lib-product-letter [product]="product">
+        
+            </lib-product-letter>
+        </ng-template>
+    }
+    </lib-carousel>  
+</div>     

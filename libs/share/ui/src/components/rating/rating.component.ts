@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, input, OnInit } from '@angular/core';
+import {  Component, input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -10,14 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './rating.component.scss',
 })
 export class RatingComponent implements OnInit{
-  constructor(private cdr: ChangeDetectorRef) {}
+  rating  = input<number>()
+  size  = input<number>()
+  stars: number[] = []
 
   ngOnInit(): void {
     this.checkRaiting()    
   }
-  rating  = input<number>()
-  size  = input<number>()
-  stars: number[] = []
 
   checkRaiting(){
     const rati= this.rating()

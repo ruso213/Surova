@@ -14,6 +14,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModu
 export class InputComponent implements ControlValueAccessor {
   @Input()shadow= false 
   @Input() inputType: 'text' | 'number' | 'email' | 'password' | 'date' | 'time' | 'tel' | 'url' = 'text';
+  
   writeValue(obj: any): void {
     throw new Error('Method not implemented.');
   }

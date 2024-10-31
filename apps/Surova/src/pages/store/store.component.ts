@@ -1,27 +1,28 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent, CarouselComponent, CustomCheckboxComponent, FilterListComponent, HeaderComponent, InputComponent, ProductLetterComponent, ProductTargetComponent, SliderComponent, letterDirective } from '@surova/ui';
+import { ButtonComponent, CustomCheckboxComponent, FilterListComponent, HeaderComponent, InputComponent, LoadingComponent, NoFindProductsComponent, ProductTargetComponent, SliderComponent } from '@surova/ui';
 import { MatIconModule } from '@angular/material/icon';
 import { Filt, Filters, FiltType, Product, StoreService } from '@surova/utils';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { CarouserlProductsComponent } from './carouserProducts/carouserlProducts.component';
 
 @Component({
   selector: 'app-store',
   standalone: true,
   imports: [
     CommonModule, 
-    CarouselComponent,
-    letterDirective,
-    ProductLetterComponent,
+    CarouserlProductsComponent,
     HeaderComponent, 
     InputComponent,
     MatIconModule,
     ProductTargetComponent,
     CustomCheckboxComponent,
     FilterListComponent,
+    LoadingComponent,
     SliderComponent,
     ButtonComponent,
+    NoFindProductsComponent,
     ReactiveFormsModule
   ],
   templateUrl: './store.component.html',
@@ -31,7 +32,8 @@ export class StoreComponent implements OnInit{
   formsModule = inject(FormBuilder)
   storeService = inject(StoreService)
   activatedRoute = inject(ActivatedRoute)
-  carouselProducts : Product[]= []
+  load = false
+  filterProducts : Product[]=[]
   storeProducts : Product[]=[]
   toFilt:FiltType[] = []
   filters:Filters[] = [
@@ -48,21 +50,21 @@ export class StoreComponent implements OnInit{
     },
   ]
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.storeProducts =[]
-      if (params[0]) {
-        this.storeService.getOnlyCategoryProducts(params[0]).then(i =>i.forEach(product => {
-          this.storeProducts.push(product.data() as Product)
-        }) )
-        this.storeService.getProducts().then(()=>{
-          this.carouselProducts = this.storeService.products
-        })
-      }else{
-        this.storeService.getProducts().then(()=>{
-          this.storeProducts = this.storeService.products
-          this.carouselProducts = this.storeService.products
-        })
-      }
+    this.storeService.getProducts()
+    this.storeService.Products$.subscribe(products => {
+      this.activatedRoute.queryParams.subscribe(i => {
+        if (i[0]) {
+          this.storeProducts= this.storeService.getOnlyCategoryProducts(i[0])
+          this.filterProducts = [...this.storeProducts]
+          this.load = true
+
+        }
+        else {
+          this.storeProducts = products
+          this.filterProducts = [...this.storeProducts]
+          this.load = true
+        }
+      })
     })
   }
 
@@ -74,11 +76,13 @@ export class StoreComponent implements OnInit{
     }
   }
 
-  filterProducts(){
-    const productsToFilt :Product[]= []
-    this.storeProducts.forEach(i => productsToFilt.push(i))
-    this.storeProducts=  this.storeService.getProductWfilter(this.toFilt, productsToFilt)
-    console.log(this.storeProducts);
+  filterProductsFn(){
+    this.load = false
+    this.filterProducts = []
+    this.storeProducts.forEach(i => this.filterProducts.push(i))
+    this.filterProducts=  this.storeService.getProductWfilter(this.toFilt, this.filterProducts)    
+    this.load= true
+
     
   }
 }
