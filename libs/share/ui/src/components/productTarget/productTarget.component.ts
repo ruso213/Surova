@@ -13,4 +13,5 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class ProductTargetComponent {
   product = input<Product>()
+ 
 }

@@ -10,6 +10,8 @@ import { BehaviorSubject } from 'rxjs';
 export class StoreService {
   private readonly products = new BehaviorSubject<Product[]>([]);
   Products$ = this.products.asObservable()
+  private readonly filters = new BehaviorSubject<FiltType[]>([]);
+  Filters$ = this.filters.asObservable()
   
   constructor(private readonly db: Firestore) {}
 
@@ -28,8 +30,7 @@ export class StoreService {
   }
 
   getProductWfilter(filter: FiltType[],products:Product[] ) {
-    let filterProducts = products   
-    
+    let filterProducts = products
     filter.forEach((item) => {
       switch (item.id) {
         case Filt.RATE:
@@ -39,7 +40,6 @@ export class StoreService {
           return;
         case Filt.PRICE:
           filterProducts = filterProducts.filter((i) => {
-           
             return i.price > item.range[0] && i.price < item.range[1];
           });
           return;
@@ -50,9 +50,17 @@ export class StoreService {
     });
     return filterProducts;
   }
-
+  getProductsWname(name:string, products:Product[]){
+    console.log(name,products);
+  }
   getOnlyCategoryProducts(category: string){
     const productOfCategory = this.products.getValue().filter(i => i.principalCategory == category)
     return productOfCategory    
   }
+
+  emitFiltersValue(filters:FiltType[]){
+    this.filters.next(filters)
+  }
+
+  
 }

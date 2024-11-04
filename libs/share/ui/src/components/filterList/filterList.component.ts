@@ -28,7 +28,7 @@ export class FilterListComponent implements OnInit{
   }
 
   categoryLink(link:string){
-    this.route.navigate(['category'],{queryParams:[link]})
+    this.route.navigate(['store/category'],{queryParams:[link]})
   }
 
   deleteFilters(){

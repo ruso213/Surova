@@ -1,0 +1,22 @@
+<div class="relative">
+    @if (filterProducts.length > 0 ) {
+        <div  class=" w-full pl-4 lg:pr-8"> 
+            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-4 py-2">
+                @for (item of filterProducts; track $index) {
+                    <lib-product-target [product]="item"></lib-product-target>
+                }
+            </div>
+        </div>
+    }@else if(filterProducts.length == 0 && load){
+        <div class="w-full pt-32 flex items-center justify-center">
+            <lib-no-find-products></lib-no-find-products>
+        </div>
+    }
+    @if (!load ) {
+        <div class="w-full pt-32 flex items-center justify-center absolute -top-[1rem] bg-black/5 h-[84vh] ">
+            <div class="absolute top-44">
+                <lib-loading></lib-loading>
+            </div>
+        </div>
+    }
+</div>      
