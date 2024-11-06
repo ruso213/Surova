@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'lib-no-find-products',
@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrl: './noFindProducts.component.scss',
 })
 export class NoFindProductsComponent {
-  route = inject(Router)
+  clickEmitter = output()
   click(){
-    this.route.navigate(['home'])
+    this.clickEmitter.emit()
   }
 }

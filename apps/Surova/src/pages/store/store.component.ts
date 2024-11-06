@@ -33,7 +33,10 @@ export class StoreComponent implements OnInit{
   storeService = inject(StoreService)
   router = inject(Router)
   searchForm = this.formsModule.group({name:''})
-  toFilt:FiltType[] = []
+  toFilt :Pick< FiltType,'price'| 'rating'> = {
+    price:undefined,
+    rating:undefined
+  }  
   filters:Filters[] = [
     {
       id:Filt.PRICE,
@@ -49,7 +52,6 @@ export class StoreComponent implements OnInit{
   ]
   ngOnInit(): void {
     this.storeService.getProducts()
-    
   }
 
   search(){
@@ -57,14 +59,15 @@ export class StoreComponent implements OnInit{
     
   }
   filterFn(evt: Filters){
-    const isIn = this.toFilt.findIndex((i:FiltType) => i.id == evt.id)
-    if (isIn === -1) {
-      this.toFilt.push(evt)
+    if ( evt.id == 0) {
+      this.toFilt.rating = evt.range 
+    }else if(evt.id == 1){
+      this.toFilt.price = evt.range 
     }
-
   }
 
   filterProductsFn(){
-    this.storeService.emitFiltersValue(this.toFilt)
+    this.storeService.addFilters(this.toFilt)
+
   }
 }

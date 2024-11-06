@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, query, getDocs } from '@angular/fire/firestore';
 import { Product } from '../interfaces/product.interface';
-import { Filt } from '../enums';
-import { FiltType } from '../interfaces';
-import { BehaviorSubject } from 'rxjs';
+
+import {  FiltType } from '../interfaces';
+import { BehaviorSubject, filter, } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
   private readonly products = new BehaviorSubject<Product[]>([]);
   Products$ = this.products.asObservable()
-  private readonly filters = new BehaviorSubject<FiltType[]>([]);
-  Filters$ = this.filters.asObservable()
-  
+  filters:FiltType = {productName:'',price:undefined,principalCategory:'',rating:undefined}
+  filterProducts : Product[]=[]
+
   constructor(private readonly db: Firestore) {}
 
   getProducts() {
@@ -26,41 +26,43 @@ export class StoreService {
       });
       this.products.next(productsList)
     });
-    return querySnapshot;
+
   }
 
-  getProductWfilter(filter: FiltType[],products:Product[] ) {
-    let filterProducts = products
-    filter.forEach((item) => {
-      switch (item.id) {
-        case Filt.RATE:
-          filterProducts = filterProducts.filter(
-            (i) => i.rating > item.range[0] && i.rating < item.range[1]
-          );
-          return;
-        case Filt.PRICE:
-          filterProducts = filterProducts.filter((i) => {
-            return i.price > item.range[0] && i.price < item.range[1];
-          });
-          return;
-        case Filt.INsTOCK:
-          filterProducts = filterProducts.filter((i) => i.inStock);
-          return;
-      }
-    });
-    return filterProducts;
-  }
-  getProductsWname(name:string, products:Product[]){
-    console.log(name,products);
-  }
-  getOnlyCategoryProducts(category: string){
-    const productOfCategory = this.products.getValue().filter(i => i.principalCategory == category)
-    return productOfCategory    
+  getProductWfilter() {
+    this.filterProducts = []
+    const price = this.filters?.price?.[0] ?? 0;
+    const filterProducts = this.products.getValue()
+    .filter(i => 
+      i.principalCategory == this.filters.principalCategory && 
+      i.price > (price)&& i.price < (this.filters.price![1] ?? 20000) &&
+      i.rating > (this.filters.rating![0] ?? 0) && i.rating < (this.filters.rating![1] ?? 5) &&
+      i.productName.includes(this.filters.productName)
+    )
+    this.filterProducts.push(...filterProducts)
+    console.log(this.filterProducts);
+    
+    return this.filterProducts;
   }
 
-  emitFiltersValue(filters:FiltType[]){
-    this.filters.next(filters)
+
+  addFilters(filter:Partial<FiltType>){
+    this.filters = {
+      price: filter.price,      
+      rating:filter.rating,
+      principalCategory: filter.principalCategory as string,
+      productName:filter.principalCategory as string 
+    } 
+    console.log(this.filters);
+    
   }
 
-  
+  deleteFilters(){
+    this.filters = {
+      productName:'',
+      price:undefined,
+      principalCategory:'',
+      rating:undefined
+    }
+  }
 }

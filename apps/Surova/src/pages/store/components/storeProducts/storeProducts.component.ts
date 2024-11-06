@@ -17,7 +17,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './storeProducts.component.scss',
 })
 export class StoreProductsComponent implements OnInit{
-  filterProducts : Product[]=[]
   storeService = inject(StoreService)
   activatedRoute= inject(ActivatedRoute)
   storeProducts : Product[]=[]
@@ -26,25 +25,23 @@ export class StoreProductsComponent implements OnInit{
     this.storeService.Products$.subscribe(products => {
       this.activatedRoute.queryParams.subscribe(i => {
         if (i[0]) {
-          this.storeProducts= this.storeService.getOnlyCategoryProducts(i[0])
-          this.filterProducts = [...this.storeProducts]
+          this.storeService.addFilters({principalCategory:i[0]})
+          this.storeProducts= this.storeService.getProductWfilter()
           this.load = true
-
         }
         else {
           this.storeProducts = products
-          this.filterProducts = [...this.storeProducts]
+          this.storeService.filterProducts = [...this.storeProducts]
           this.load = true
         }
       })
     })
 
-    this.storeService.Filters$.subscribe(i => {
-      this.load = false
-      this.filterProducts = []
-      this.storeProducts.forEach(i => this.filterProducts.push(i))
-      this.filterProducts=  this.storeService.getProductWfilter(i, this.filterProducts)    
-      this.load= true
-    })
+    
+  }
+
+  backTo(){
+    this.storeService.deleteFilters()
+    
   }
 }
