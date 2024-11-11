@@ -1,8 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+
+import { Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Product, StoreService } from '@surova/utils';
+import { FiltType, ProductsStore} from '@surova/utils';
 import { LoadingComponent, NoFindProductsComponent, ProductTargetComponent } from '@surova/ui';
 import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-store-products',
@@ -16,32 +18,28 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './storeProducts.component.html',
   styleUrl: './storeProducts.component.scss',
 })
-export class StoreProductsComponent implements OnInit{
-  storeService = inject(StoreService)
-  activatedRoute= inject(ActivatedRoute)
-  storeProducts : Product[]=[]
-  load = false
-  ngOnInit(): void {
-    this.storeService.Products$.subscribe(products => {
-      this.activatedRoute.queryParams.subscribe(i => {
-        if (i[0]) {
-          this.storeService.addFilters({principalCategory:i[0]})
-          this.storeProducts= this.storeService.getProductWfilter()
-          this.load = true
-        }
-        else {
-          this.storeProducts = products
-          this.storeService.filterProducts = [...this.storeProducts]
-          this.load = true
-        }
-      })
-    })
+export class StoreProductsComponent implements OnInit {
+  productsStore = inject(ProductsStore)
+  activatedRoute = inject(ActivatedRoute)
 
-    
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(i =>{
+      const productFilt :Partial< FiltType>= {}
+      if (i['min$'] && i['max$'])productFilt.price = [JSON.parse(i['min$']), JSON.parse(i['max$'])];
+      if (i['category']) productFilt.principalCategory = i['category'];
+      if (i['minRate'] && i['maxRate']) productFilt.rating = [JSON.parse(i['minRate']), JSON.parse(i['maxRate'])];
+      if (i['name']) productFilt.productName = i['name'];
+      console.log(productFilt);
+      this.productsStore.changeFilters(productFilt)
+      }
+    )
+  }
+  async loadProducts(){
+    await this.productsStore.loadData()
   }
 
   backTo(){
-    this.storeService.deleteFilters()
+    console.log()
     
   }
 }

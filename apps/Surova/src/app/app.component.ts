@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { HeaderComponent } from '@surova/ui';
+import { ProductsStore} from '@surova/utils';
+import { RouterOutlet } from '@angular/router';
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule, HeaderComponent,],
+  imports: [RouterOutlet],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -19,7 +18,7 @@ export class AppComponent {
     "search",
     "progressActivity"
   ]
-
+  productsStore = inject(ProductsStore)
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
@@ -27,5 +26,6 @@ export class AppComponent {
     this.iconToRegister.forEach(icon =>{
       this.matIconRegistry.addSvgIcon(icon,this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icon/${icon}.svg`))
     })
+    this.productsStore.loadData()
   }
 }

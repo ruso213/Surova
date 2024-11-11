@@ -1,16 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
 import { CategoriesService } from '@surova/utils';
-import { CustomCheckboxComponent } from '../customCheckbox/customCheckbox.component';
 import { Router } from '@angular/router';
-import { SliderComponent } from '../slider/slider.component';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'lib-filter-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, CustomCheckboxComponent, SliderComponent, ButtonComponent],
+  imports: [CommonModule,ButtonComponent],
   templateUrl: './filterList.component.html',
   styleUrl: './filterList.component.scss',
 })
@@ -28,11 +25,14 @@ export class FilterListComponent implements OnInit{
   }
 
   categoryLink(link:string){
-    this.route.navigate(['store/category'],{queryParams:[link]})
+    this.route.navigate([],
+      {
+        queryParams:{category: link},
+        queryParamsHandling:'merge'})
   }
 
   deleteFilters(){
-    this.route.navigate(['home'])
+    this.route.navigate(['store'])
   }
 
   

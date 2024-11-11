@@ -1,18 +1,18 @@
 <div class="relative">
-    @if (storeService.filterProducts.length > 0 ) {
+    @if (productsStore.filterProducts().length > 0 ) {
         <div  class=" w-full pl-4 lg:pr-8"> 
             <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-4 py-2">
-                @for (item of storeService.filterProducts; track $index) {
+                @for (item of productsStore.filterProducts(); track $index) {
                     <lib-product-target [product]="item"></lib-product-target>
                 }
             </div>
         </div>
-    }@else if(storeService.filterProducts.length == 0 && load){
+    }@else if(productsStore.filterProducts().length == 0 && !productsStore.loading()){
         <div class="w-full pt-32 flex items-center justify-center">
             <lib-no-find-products (clickEmitter)="backTo()"></lib-no-find-products>
         </div>
     }
-    @if (!load ) {
+    @if (productsStore.loading() ) {
         <div class="w-full pt-32 flex items-center justify-center absolute -top-[1rem] bg-black/5 h-[84vh] ">
             <div class="absolute top-44">
                 <lib-loading></lib-loading>
