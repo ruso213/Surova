@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent, FilterListComponent, HeaderComponent, InputComponent,  SliderComponent } from '@surova/ui';
 import { MatIconModule } from '@angular/material/icon';
 import { Filt, Filters, FiltType, ProductsStore } from '@surova/utils';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CarouserlProductsComponent } from './components/carouserProducts/carouserlProducts.component';
 import { StoreProductsComponent } from "./components/storeProducts/storeProducts.component";
@@ -28,17 +28,18 @@ import { StoreProductsComponent } from "./components/storeProducts/storeProducts
   templateUrl: './store.component.html',
   styleUrl: './store.component.scss',
 })
-export class StoreComponent {
+export class StoreComponent{
   formsModule = inject(FormBuilder)
   productsStore = inject(ProductsStore)
   route = inject(Router)
+  activatedRoute = inject(ActivatedRoute)
   searchForm = this.formsModule.group({name:''})
   filters:Filters[] = [
     {
       id:Filt.PRICE,
       text:'Precio',
       range: [0,20000],
-      step:200
+      step:200,
     },
     {
       id:Filt.RATE,
@@ -50,7 +51,7 @@ export class StoreComponent {
     price:this.filters[0].range,
     rating:this.filters[1].range
   }  
-
+  
   search(){
     const productName =this.searchForm.getRawValue().name
     if(productName){
@@ -61,8 +62,8 @@ export class StoreComponent {
     }else{
       this.productsStore.changeFilters({productName:''})
     }
-    
   }
+  
   filterFn(evt: Filters){
     if ( evt.id == 0) {
       this.toFilt.rating = evt.range 

@@ -3,7 +3,7 @@
         <div  class=" w-full pl-4 lg:pr-8"> 
             <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-4 py-2">
                 @for (item of productsStore.filterProducts(); track $index) {
-                    <lib-product-target [product]="item"></lib-product-target>
+                    <lib-product-target (openProductEmitter)="openProduct($event)" [product]="item"></lib-product-target>
                 }
             </div>
         </div>

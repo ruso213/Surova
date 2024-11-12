@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '@surova/utils';
 import { RatingComponent } from '../rating/rating.component';
@@ -13,5 +13,10 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class ProductTargetComponent {
   product = input<Product>()
- 
+  openProductEmitter = output<string>()
+
+  clickBuy(){
+    const productId = this.product()?.id
+    if (productId) this.openProductEmitter.emit(productId)
+  }
 }

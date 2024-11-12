@@ -53,7 +53,7 @@ export class CarouselComponent implements AfterContentInit{
           break;
       }      
       this.percentage = this.percentage + this.position
-      slider.style.transform = `translateX(-${this.position * 102}%)`;
+      slider.style.transform = `translateX(-${this.position * 100}%)`;
       slider.style.transition = 'transform 0.5s ease';
     }
 
@@ -61,7 +61,7 @@ export class CarouselComponent implements AfterContentInit{
   moveTo(index: number){  
     const slider = document.querySelector<HTMLElement>('.carousel')
     if (slider){
-      slider.style.transform = `translateX(-${index * 101}%)`;
+      slider.style.transform = `translateX(-${index * 100}%)`;
       slider.style.transition = 'transform 0.5s ease';
       this.position = index
     }

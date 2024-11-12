@@ -17,7 +17,7 @@ export class SliderComponent {
   step = input<number>()
   range:number[] = []
   emitRange = output<Filters>()
-
+  filtValue=[]
   onStartThumbChange(evt:any){
     this.range[0]= Number(evt.value)
     const options = this.sliderOptions()

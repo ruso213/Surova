@@ -14,7 +14,12 @@ export class StoreService {
     const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
     const productsList: Product[] = []
-    querySnapshot.forEach(i => productsList.push(i.data() as Product))
+    querySnapshot.forEach(i => {
+      productsList.push({
+        ...i.data(),
+        id:i.id
+      } as Product)
+    })
     return productsList
   }
 

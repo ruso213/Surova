@@ -24,13 +24,17 @@ export class StoreProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(i =>{
-      const productFilt :Partial< FiltType>= {}
-      if (i['min$'] && i['max$'])productFilt.price = [JSON.parse(i['min$']), JSON.parse(i['max$'])];
-      if (i['category']) productFilt.principalCategory = i['category'];
-      if (i['minRate'] && i['maxRate']) productFilt.rating = [JSON.parse(i['minRate']), JSON.parse(i['maxRate'])];
-      if (i['name']) productFilt.productName = i['name'];
-      console.log(productFilt);
-      this.productsStore.changeFilters(productFilt)
+        const productFilt :FiltType= {
+          price:[0,20000],
+          principalCategory:'',
+          productName:'',
+          rating:[0,5]
+        }
+        if (i['min$'] && i['max$'])productFilt.price = [JSON.parse(i['min$']), JSON.parse(i['max$'])];
+        if (i['category']) productFilt.principalCategory = i['category'];
+        if (i['minRate'] && i['maxRate']) productFilt.rating = [JSON.parse(i['minRate']), JSON.parse(i['maxRate'])];
+        if (i['name']) productFilt.productName = i['name'];
+        this.productsStore.changeFilters(productFilt)
       }
     )
   }
@@ -41,5 +45,9 @@ export class StoreProductsComponent implements OnInit {
   backTo(){
     console.log()
     
+  }
+
+  openProduct(evt:string){
+    console.log(evt);
   }
 }

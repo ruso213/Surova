@@ -17,6 +17,7 @@ export interface Product {
   stockCount: number;            // Cantidad en stock
   tags: string[];                // Etiquetas del producto
   variants: Variant[];           // Variantes (tamaños, colores, etc.)
+  id:string
 }
 
 export  interface Review {

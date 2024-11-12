@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoriesService } from '@surova/utils';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -14,14 +14,15 @@ import { ButtonComponent } from '../button/button.component';
 export class FilterListComponent implements OnInit{
   categoryService = inject(CategoriesService)
   route= inject(Router)
+  activeRoute= inject(ActivatedRoute)
   principalCategories:string[] = []
-
+  actualCategory = ''
   ngOnInit(): void {
     this.categoryService.getProductCategories().then(i => 
       i.forEach(category =>         
         this.principalCategories.push(category)
-
     ))
+    this.activeRoute.queryParams.subscribe(i => this.actualCategory = i['category'])
   }
 
   categoryLink(link:string){
