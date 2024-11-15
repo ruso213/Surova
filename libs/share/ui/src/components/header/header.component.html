@@ -1,4 +1,7 @@
-<header class="h-16 px-10 bg-white-low w-full flex flex-row  items-center text-black">
+<header 
+[class.bg-white-low]="color == 'light'" 
+[class.bg-black]="color == 'dark'" 
+class="h-16 px-10  w-full flex flex-row  items-center text-black">
     <div>
         <p>LOGO</p>
     </div>

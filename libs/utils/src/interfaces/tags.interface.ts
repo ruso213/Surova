@@ -2,7 +2,8 @@ import { Filt } from "../enums";
 import { Product } from "./product.interface";
 
 
-export interface Filters{
+export interface FiltersSlider{
+    formId?:string
     id:Filt
     text?:string
     range:number[];

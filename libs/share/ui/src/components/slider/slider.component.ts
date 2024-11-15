@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, input, output } from '@angular/core';
+import { Component, forwardRef, input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSliderModule} from '@angular/material/slider';
-import { Filters } from '@surova/utils';
+import { FiltersSlider } from '@surova/utils';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'lib-slider',
@@ -11,34 +12,42 @@ import { Filters } from '@surova/utils';
   imports: [CommonModule,MatIconModule,MatSliderModule ],
   templateUrl: './slider.component.html',
   styleUrl: './slider.component.scss',
+  providers:[{
+    provide:NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(()=>SliderComponent ),
+    multi:true
+  }]
 })
-export class SliderComponent {
-  sliderOptions = input<Filters>()
+export class SliderComponent implements ControlValueAccessor{
+ 
+  sliderOptions = input<FiltersSlider>()
   step = input<number>()
-  range:number[] = []
-  emitRange = output<Filters>()
-  filtValue=[]
-  onStartThumbChange(evt:any){
-    this.range[0]= Number(evt.value)
-    const options = this.sliderOptions()
-    if(!this.range[1] && options ) this.range[1] = options?.range[1]
-    if (options) {
-      this.emitRange.emit({
-        id:options.id,
-        range: this.range,
-      })
+  value:number[]=[]
+
+  onChange !: (i :number[])=> void
+  onTouched !: ()=> void
+
+  writeValue(obj: number[]): void {
+    this.value =obj
+    if(obj[0] == undefined) {
+      console.log(obj);
+      this.value = [...this.sliderOptions()!.range]
     }
   }
 
+  registerOnChange(fn: any): void {    
+    this.onChange = fn
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn
+  }
+
+  onStartThumbChange(evt:any){
+    this.value[0]=Number(evt.value)
+  }
+
   onEndThumbChange(evt:any){
-    this.range[1]= Number(evt.value) 
-    const options = this.sliderOptions()
-    if (!this.range[0]) this.range[0] = options?.range[0] as number
-    if (options) {
-      this.emitRange.emit({
-        id:options.id,
-        range: this.range,
-      })
-    } 
+    this.value[1]= Number(evt.value)
   }
 }

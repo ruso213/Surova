@@ -1,8 +1,8 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent, FilterListComponent, HeaderComponent, InputComponent,  SliderComponent } from '@surova/ui';
 import { MatIconModule } from '@angular/material/icon';
-import { Filt, Filters, FiltType, ProductsStore } from '@surova/utils';
+import { Filt, FiltersSlider, ProductsStore } from '@surova/utils';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CarouserlProductsComponent } from './components/carouserProducts/carouserlProducts.component';
@@ -28,32 +28,45 @@ import { StoreProductsComponent } from "./components/storeProducts/storeProducts
   templateUrl: './store.component.html',
   styleUrl: './store.component.scss',
 })
-export class StoreComponent{
+export class StoreComponent implements OnInit{
   formsModule = inject(FormBuilder)
   productsStore = inject(ProductsStore)
   route = inject(Router)
   activatedRoute = inject(ActivatedRoute)
-  searchForm = this.formsModule.group({name:''})
-  filters:Filters[] = [
+  filtersForm = this.formsModule.group({
+    name:'',
+    price:[[0,20000]],
+    rate:[[0,5]],
+  })
+  filters:FiltersSlider[] = [
     {
       id:Filt.PRICE,
       text:'Precio',
       range: [0,20000],
       step:200,
+      formId:'price'
     },
     {
       id:Filt.RATE,
       text:'Rating',
       range: [0,5],
+      formId:'rate'
     },
   ]
-  toFilt :Pick< FiltType,'price'| 'rating'> = {
-    price:this.filters[0].range,
-    rating:this.filters[1].range
-  }  
   
+ngOnInit(): void {
+  this.activatedRoute.queryParams.subscribe( i => {
+    const priceRange = [i['min$'],i['max$']]
+    const rateRange = [i['minRate'],i['maxRate']]
+    this.filtersForm.get('price')?.setValue(priceRange)
+    this.filtersForm.get('rate')?.setValue(rateRange)
+
+    this.filtersForm.valueChanges.subscribe(i => console.log(i))
+  })
+}
+
   search(){
-    const productName =this.searchForm.getRawValue().name
+    const productName =this.filtersForm.getRawValue().name
     if(productName){
       this.route.navigate([],{
         queryParams:{name:productName},
@@ -63,24 +76,20 @@ export class StoreComponent{
       this.productsStore.changeFilters({productName:''})
     }
   }
-  
-  filterFn(evt: Filters){
-    if ( evt.id == 0) {
-      this.toFilt.rating = evt.range 
-    }else if(evt.id == 1){
-      this.toFilt.price = evt.range 
-    }
-  }
 
   filterProductsFn(){
-    this.route.navigate([],{
-      queryParams:{
-        min$: this.toFilt.price![0], 
-        max$:this.toFilt.price![1],
-        minRate: this.toFilt.rating![0], 
-        maxRate:this.toFilt.rating![1],
-      },
-      queryParamsHandling:'merge'
-    })
+    const priceRange = this.filtersForm.value.price
+    const rateRange = this.filtersForm.value.rate
+    if (priceRange && rateRange) {
+      this.route.navigate([],{
+        queryParams:{
+          min$: priceRange[0], 
+          max$:priceRange[1],
+          minRate: rateRange[0], 
+          maxRate:rateRange[1],
+        },
+        queryParamsHandling:'merge'
+      })
+    }
   }
 }

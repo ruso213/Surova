@@ -1,19 +1,21 @@
 
 <div class="w-full">
-    <lib-header></lib-header>
+    <header Srvheader></header>
     <app-carouserl-products></app-carouserl-products>
     <div class=" bg-white-low   h-full">
         <div class="flex flex-row w-full  h-full">
-            <lib-filter-list >
-                @for (item of filters; track $index) {
-                    <lib-slider  (emitRange)="filterFn($event)" [step]="item.step" [sliderOptions]="item"></lib-slider>
-                }
-                <button Srvbttn typeBttn="shadow" (click)="filterProductsFn()">Filtrar</button>
-            </lib-filter-list>
+            <form class="w-3/12" (ngSubmit)="filterProductsFn()" [formGroup]="filtersForm">
+                <lib-filter-list >
+                    @for (item of filters; track $index) {
+                        <lib-slider [formControlName]="item.formId!" [step]="item.step" [sliderOptions]="item"></lib-slider>
+                    }
+                    <button Srvbttn typeBttn="shadow" type="submit" (click)="filterProductsFn()">Filtrar</button>
+                </lib-filter-list>
+            </form>
 
             <div class="flex flex-col h-full w-full  gap-3  ">
 
-                <form [formGroup]="searchForm" class="px-7 py-16   bg-white-low shadow-bottom h-12 grid grid-cols-12 sticky top-0 z-20">
+                <form [formGroup]="filtersForm" class="px-7 py-16   bg-white-low shadow-bottom h-12 grid grid-cols-12 sticky top-0 z-20">
                     <lib-input formControlName="name"  class="col-span-9 shadow-perso rounded-full h-6 relative -top-5">
                         <div srvPreffix class="w-10 flex items-center justify-center">
                             <mat-icon>search</mat-icon>
