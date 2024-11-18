@@ -1,13 +1,14 @@
 <header 
-[class.bg-white-low]="color == 'light'" 
-[class.bg-black]="color == 'dark'" 
-class="h-16 px-10  w-full flex flex-row  items-center text-black">
+[class.bg-white-low]="color() == 'light'" 
+[class.bg-black]="color() == 'dark'" 
+[class.text-white]="color() == 'dark'" 
+class="h-16 px-10  w-full flex flex-row  items-center">
     <div>
         <p>LOGO</p>
     </div>
     <div class="flex flex-row  w-full mx-64">
         @for (item of urls; track $index) {
-            <button Srvbttn [typeBttn]="'none'" (click)="navigate(item.root)" >{{item.text}}</button>
+            <button [class.darkBttn]="color() == 'dark'" Srvbttn [typeBttn]="'none'" (click)="navigate(item.root)" >{{item.text}}</button>
             
         }
       

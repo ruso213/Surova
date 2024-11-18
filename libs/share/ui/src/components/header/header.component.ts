@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import {  MatIconModule } from '@angular/material/icon';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  color:'light' | 'dark'='light'
+  color=input<'light' | 'dark'>('light')
   route=inject(Router)
   urls=[
     {

@@ -23,5 +23,8 @@ export class StoreService {
     return productsList
   }
 
+  async getOneProduct(){
+    return 
+  }
   
 }
