@@ -20,7 +20,7 @@ module.exports = {
         'gray-brawn': '#BBB9B5',
       },
       boxShadow:{
-        'perso': '4px 4px 7px 3px rgba(0, 0, 0, 0.1);',
+        'perso': ' 2px 2px 8px 4px rgba(0, 0, 0, 0.13);',
         'bottom': '7px 2px 9px 0px rgba(0, 0, 0, 0.1);'
       },
       screens:{

@@ -1,0 +1,15 @@
+::-webkit-scrollbar {
+    width: .6rem;              /* Ancho del scrollbar */
+    height: .6rem;             /* Altura del scrollbar horizontal */
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: #BFBFBF;   /* Color del pulgar */
+    border-radius: 10px;
+    border: 2px solid #f1f1f108; /* Espacio entre el pulgar y el track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #BFBFBF;   /* Color del pulgar al pasar el mouse */
+}
