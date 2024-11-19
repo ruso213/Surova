@@ -7,3 +7,14 @@ mat-icon{
     border-radius: .25rem;
     background: rgba(255, 255, 255, 0.126);
 }
+
+.icon{
+    color: red;
+
+    &.dark{
+        color: white;
+    }
+    &.light{
+        color: black;
+    }
+}

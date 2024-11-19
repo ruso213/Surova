@@ -24,6 +24,7 @@ module.exports = {
         'bottom': '7px 2px 9px 0px rgba(0, 0, 0, 0.1);'
       },
       screens:{
+        'xs':'500px',
         'ml':'850px',
       }
     },

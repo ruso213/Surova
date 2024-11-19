@@ -2,16 +2,28 @@
 [class.bg-white-low]="color() == 'light'" 
 [class.bg-black]="color() == 'dark'" 
 [class.text-white]="color() == 'dark'" 
-class="h-16 px-10  w-full flex flex-row  items-center">
-    <div>
-        <p>LOGO</p>
+class="h-12 sm:h-16 px-4 sm:px-10  w-full flex flex-row  items-center justify-between">
+    <div class="flex flex-row items-center gap-4">
+        <div class="flex items-center xs:hidden"> 
+            <mat-icon
+            [class.dark]="color() == 'dark'"
+             [class.light]="color() == 'light'" class="icon cursor-pointer ">menu</mat-icon>
+        </div>
+        <div class="flex items-center gap-3 pr-6 sm:p-0">
+            <img class="h-6 xs:h-8 cursor-pointer" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPdq8SWQqtqxSFCsFEOPxd1qwYj5uyre3Big&s" alt="">
+            <p>Surova</p>
+        </div>
     </div>
-    <div class="flex flex-row  w-full mx-64">
+    <div class="xs:flex flex-row  hidden ">
         @for (item of urls; track $index) {
             <button [class.darkBttn]="color() == 'dark'" Srvbttn [typeBttn]="'none'" (click)="navigate(item.root)" >{{item.text}}</button>
             
         }
-      
-        
     </div>
+    <div class="flex items-center ">
+        <mat-icon
+        [class.dark]="color() == 'dark'" 
+        [class.light]="color() == 'light'" class="icon cursor-pointer " >shopping_cart</mat-icon>
+    </div>
+
 </header>
