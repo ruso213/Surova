@@ -47,7 +47,4 @@ export class StoreProductsComponent implements OnInit {
     
   }
 
-  openProduct(evt:string){
-    console.log(evt);
-  }
 }

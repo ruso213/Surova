@@ -1,0 +1,37 @@
+<div class=" flex h-full   gap-2
+        flex-col-reverse
+        md:flex-row 
+        ml:flex-col-reverse 
+        xl:flex-row">
+    <div class="rounded-md flex gap-2  overflow-auto h-2/5 
+    flex-row  
+    md:flex-col  md:w-1/5 
+    ml:flex-row ml:w-full ml:h-4/5
+    xl:h-full   xl:flex-col  xl:w-1/5 ">
+        <div class="images flex gap-2 pb-1 pr-1  p-2
+        flex-row max-h-[33rem] overflow-auto 
+        md:flex-col  md:max-h-[25rem] 
+        ml:flex-row  
+        xl:flex-col xl:h-full xl:max-h-[33rem] ">
+            @for (item of imgs(); track $index) {
+                <button class="
+                h-[6rem] w-[6rem] 
+                md:h-[7rem] md:w-[7rem]
+                ml:h-[7rem] ml:w-[7rem]
+                xl:h-[7.6rem] xl:w-[7.6rem]"  [class.focus]="item == principalImg" (click)="imgClicked(item)">
+                    <lib-select-image  [img]="item"></lib-select-image>
+                </button>
+            }
+        </div>
+    </div>
+    <div class="  flex items-center justify-center
+        h-56
+        md:w-4/5 md:h-[25rem]
+        ml:h-[25rem] ml:w-full
+        xl:w-4/5 xl:h-[30rem]">
+        <img class="rounded-md hover:backdrop-blur-sm object-contain
+        max-h-[14rem]
+        md:max-h-[25rem]
+        " [src]="principalImg" alt="">
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,4 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './selectImage.component.html',
   styleUrl: './selectImage.component.scss',
 })
-export class SelectImageComponent {}
+export class SelectImageComponent {
+  img = input()
+  
+}

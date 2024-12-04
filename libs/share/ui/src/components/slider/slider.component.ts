@@ -45,9 +45,11 @@ export class SliderComponent implements ControlValueAccessor{
 
   onStartThumbChange(evt:any){
     this.value[0]=Number(evt.value)
+    this.onChange(this.value)
   }
-
+  
   onEndThumbChange(evt:any){
     this.value[1]= Number(evt.value)
+    this.onChange(this.value)
   }
 }

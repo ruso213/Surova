@@ -9,7 +9,7 @@
 
             <lib-product-details [product]="product()">
                 <ng-container buttons>
-                    <button class="w-full text-xl h-full" Srvbttn  typeBttn="buy">Comprar</button>
+                    <button class="w-full text-xl h-full" Srvbttn (click)="buyProduct()" typeBttn="buy">Comprar</button>
                 </ng-container>
             </lib-product-details>
         </div>

@@ -1,4 +1,4 @@
-import {  Component, input, OnInit } from '@angular/core';
+import {  Component, effect, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -9,17 +9,20 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './rating.component.html',
   styleUrl: './rating.component.scss',
 })
-export class RatingComponent implements OnInit{
+export class RatingComponent {
   rating  = input<number>()
   size  = input<number>()
   stars: number[] = []
 
-  ngOnInit(): void {
-    this.checkRaiting()    
+  constructor(){
+    effect(()=>{
+      this.checkRaiting()
+    })
   }
 
   checkRaiting(){
     const rati= this.rating()
+    this.stars = []
     let surplus = 0
     if (rati) {
       let index = 1; 

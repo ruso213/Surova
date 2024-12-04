@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, query, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, query, getDocs, getDoc, doc } from '@angular/fire/firestore';
 import { Product } from '../interfaces/product.interface';
 
 
@@ -23,8 +23,14 @@ export class StoreService {
     return productsList
   }
 
-  async getOneProduct(){
-    return 
+  async getProductByID(id:string){
+    const docRef = doc(this.db, 'products',id);
+    const querySnapshot = await getDoc(docRef);
+    if (querySnapshot.exists()) {
+      return querySnapshot.data()
+    }else{
+      return false
+    }
   }
   
 }

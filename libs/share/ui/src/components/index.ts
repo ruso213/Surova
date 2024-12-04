@@ -12,3 +12,5 @@ export * from './noFindProducts/noFindProducts.component'
 export * from './loading/loading.component'
 export * from './selectImage/selectImage.component'
 export * from './productDetails/productDetails.component'
+export * from './showProductImgs/showProductImgs.component'
+

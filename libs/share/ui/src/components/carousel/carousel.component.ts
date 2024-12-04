@@ -1,4 +1,4 @@
-import { AfterContentInit, Component,ContentChildren,Directive, QueryList, TemplateRef } from '@angular/core';
+import { AfterContentInit, Component,ContentChildren,Directive, input, QueryList, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule} from '@angular/material/icon';
 
@@ -21,10 +21,14 @@ export class CarouselComponent implements AfterContentInit{
 
 
   ngAfterContentInit(): void {
+    const slider = document.querySelector<HTMLElement>('.carousel')
+    console.log(slider!.scrollWidth);
     this.percentage  = this.letter?.length ?? 0
+    console.log(this.percentage);
+    
     this.contantlyMove()
   }
-  
+  move = input<boolean>(false)
   percentage = 0;
   position = 0;
   touchedRow= false
@@ -35,6 +39,10 @@ export class CarouselComponent implements AfterContentInit{
 
   moveLetter(side:string){
     const slider = document.querySelector<HTMLElement>('.carousel')
+    const firstChild = slider?.firstChild as HTMLElement
+    const width = firstChild.offsetWidth
+
+    
     if (slider && this.letter) {
       switch(side){
         case 'chevronRight':
@@ -53,7 +61,9 @@ export class CarouselComponent implements AfterContentInit{
           break;
       }      
       this.percentage = this.percentage + this.position
-      slider.style.transform = `translateX(-${this.position * 100}%)`;
+      slider.style.transform = `translateX(-${this.position* width}px)`;
+      console.log(width);
+      
       slider.style.transition = 'transform 0.5s ease';
     }
 
@@ -68,10 +78,14 @@ export class CarouselComponent implements AfterContentInit{
   }
 
   contantlyMove(){
-    this.moveLetter('chevronRight')
-    setTimeout(()=>{
-      this.contantlyMove()
-      this.touchedRow = false
-    },10000)
+    console.log(this.move());
+    
+    if (this.move()) {
+      this.moveLetter('chevronRight')
+      setTimeout(()=>{
+        this.contantlyMove()
+        this.touchedRow = false
+      },10000)
+    }
   }
 }

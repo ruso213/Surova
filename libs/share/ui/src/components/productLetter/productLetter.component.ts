@@ -1,10 +1,11 @@
 import { Product } from '@surova/utils';
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
 import { ProductDetailsComponent } from '../productDetails/productDetails.component';
 import { ButtonComponent } from '../button/button.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,5 +16,10 @@ import { ButtonComponent } from '../button/button.component';
   styleUrl: './productLetter.component.scss',
 })
 export class ProductLetterComponent {
-    product = input<Product>()
+  route = inject(Router)
+  product = input<Product>()
+  buyProduct(){
+    this.route.navigate([`product/${this.product()?.id}`])
+  }
+  
 }
