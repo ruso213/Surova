@@ -1,4 +1,4 @@
-import { AfterContentInit, Component,ContentChildren,Directive, input, QueryList, TemplateRef } from '@angular/core';
+import {  Component,ContentChildren,Directive, ElementRef, HostListener, input, QueryList, TemplateRef, viewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule} from '@angular/material/icon';
 
@@ -15,38 +15,46 @@ export class letterDirective{
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
-export class CarouselComponent implements AfterContentInit{
+export class CarouselComponent {
   
   @ContentChildren(letterDirective) letter :QueryList<letterDirective>| undefined; // hace referencia a toda etiqueta que use la directiva
 
-
-  ngAfterContentInit(): void {
-    const slider = document.querySelector<HTMLElement>('.carousel')
-    console.log(slider!.scrollWidth);
-    this.percentage  = this.letter?.length ?? 0
-    console.log(this.percentage);
-    
-    this.contantlyMove()
-  }
   move = input<boolean>(false)
-  percentage = 0;
+  showPosition = input<boolean>(true)
   position = 0;
   touchedRow= false
+
+  caroselRef = viewChild<ElementRef>("carousel")
+  carouselItemRef = viewChild<ElementRef>("carouselItem")
+
+ 
+
+
+
+  @HostListener("window:resize", ["$event"])
+  onResize(event: unknown) {
+    console.log("resize", event,this.caroselRef()?.nativeElement?.offsetWidth)
+    const positions = this.carouselItemRef()?.nativeElement?.scrollWidth/ this.carouselItemRef()?.nativeElement.offsetWidth
+    
+
+    
+  }
+
   clickRow(side:string){
     this.moveLetter(side as 'chevronLeft' | "chevronRight")
     this.touchedRow = true
   }
 
   moveLetter(side:string){
-    const slider = document.querySelector<HTMLElement>('.carousel')
-    const firstChild = slider?.firstChild as HTMLElement
-    const width = firstChild.offsetWidth
-
+    const viewableContent= this.carouselItemRef()?.nativeElement.offsetWidth
+    const fullContent = this.carouselItemRef()?.nativeElement?.scrollWidth
+    const totalSwitchs = JSON.parse(fullContent)/JSON.parse(viewableContent)
+    console.log(totalSwitchs);
     
-    if (slider && this.letter) {
+    if (this.carouselItemRef()?.nativeElement && this.letter) {
       switch(side){
         case 'chevronRight':
-          if(this.position < this.letter.length -1){
+          if(this.position < totalSwitchs - 1){
             this.position++
           }else{
             this.position = 0
@@ -56,30 +64,20 @@ export class CarouselComponent implements AfterContentInit{
           if(this.position > 0){
             this.position = this.position - 1
           }else{
-            this.position = this.letter.length -1
+            this.position = totalSwitchs -1 
           }
           break;
       }      
-      this.percentage = this.percentage + this.position
-      slider.style.transform = `translateX(-${this.position* width}px)`;
-      console.log(width);
-      
-      slider.style.transition = 'transform 0.5s ease';
     }
-
   }
+
   moveTo(index: number){  
-    const slider = document.querySelector<HTMLElement>('.carousel')
-    if (slider){
-      slider.style.transform = `translateX(-${index * 100}%)`;
-      slider.style.transition = 'transform 0.5s ease';
-      this.position = index
-    }
+    console.log(index);
+    this.position = index
   }
 
   contantlyMove(){
     console.log(this.move());
-    
     if (this.move()) {
       this.moveLetter('chevronRight')
       setTimeout(()=>{

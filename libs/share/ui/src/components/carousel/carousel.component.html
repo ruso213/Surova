@@ -1,5 +1,8 @@
-<div class="relative overflow-x-hidden   flex w-full h-full  items-center justify-center ">
-    <div class="carousel absolute flex w-full h-full items-center justify-start ">
+<div class="relative overflow-x-hidden flex w-full h-full  items-center justify-center " #carousel>
+    <div #carouselItem 
+    [style.transform]="'translateX(-' + position * carouselItem.offsetWidth + 'px)'"
+    [style.transition]="'transform 1s ease'"
+    class="absolute flex w-full h-full items-center justify-start  ">
         @for (letter of letter?.toArray(); track $index) {
                 <ng-container [ngTemplateOutlet]="letter.template" >
                 </ng-container>
@@ -15,14 +18,16 @@
             </button>
         }       
     </div>
+    @if (showPosition()) {
 
-    <div class="absolute top-[96%] flex gap-3 ">
-        @for (item of letter; track $index) {
-            <button (click)="moveTo($index)" 
-            [class.pointer]="$index === position" 
-            class="bg-white/20 cursor-pointer rounded-full w-5 h-2 ">
+        <div class="absolute top-[96%] flex gap-3 ">
+            @for (item of letter; track $index) {
+                <button (click)="moveTo($index)" 
+                [class.pointer]="$index === position" 
+                class="bg-white/20 cursor-pointer rounded-full w-5 h-2 ">
                 
             </button>
         }
     </div>  
+}
 </div>

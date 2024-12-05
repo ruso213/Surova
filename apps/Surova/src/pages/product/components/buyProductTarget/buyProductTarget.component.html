@@ -1,5 +1,5 @@
-<div class="max-h-full bg-gray-notlow p-4 ">
-    <div class="bg-gray-50 rounded-md  p-5 shadow-perso flex flex-col gap-5">
+<div class="max-h-full bg-gray-notlow p-4  flex justify-center">
+    <div class="bg-gray-50 rounded-md max-w-[100rem]  p-5 shadow-perso flex flex-col gap-5">
 
         <div class=" border-b pb-2 xl:max-h-[36rem] 
         flex flex-col  gap-4
@@ -26,19 +26,27 @@
             </div>
         </div>
         <div class="h-full">
-            <div class="h-full w-full">
+            <div class="h-full w-full flex flex-col gap-3 ">
                 <p class="text-2xl text-blue-500 font-light">
                     productos relacionados
                 </p>
                 <div class="h-80 w-full">
-
-                    <lib-carousel [move]="false" >
-                        @for (item of [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7]; track $index) {
-                            <ng-template libItemCarousel>
-                                <div class="h-40 w-40 p-40"><p>olasafasfafas{{item}}</p></div>
-                            </ng-template>
-                        }
-                    </lib-carousel>
+                        <lib-carousel [move]="false" [showPosition]="false" >
+                            @for (item of [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,7,'nueve']; track $index) {
+                                <ng-template libItemCarousel>
+                                    <div class="px-2
+                                    min-w-full
+                                    xs:min-w-[50%] xs:w-1/2 xs:max-w-[50%]
+                                    sm:min-w-[33.333333%] sm:w-1/3 sm:max-w-[33.333333%]
+                                    ml:min-w-[25%] ml:w-1/4 ml:max-w-[25%]
+                                    xl:min-w-[20%] xl:w-1/5 xl:max-w-[20%]
+                                    
+                                    ">
+                                        <lib-product-target></lib-product-target>
+                                    </div>
+                                </ng-template>
+                            }
+                        </lib-carousel>
                 </div>
             </div>
 
