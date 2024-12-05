@@ -1,25 +1,27 @@
-<div class="relative overflow-x-hidden flex w-full h-full  items-center justify-center " #carousel>
+<div class="relative overflow-x-hidden flex w-full h-full  items-center justify-center" #carousel>
     <div #carouselItem 
+    [class.topContainer]="rowsPositions()=='top'"
     [style.transform]="'translateX(-' + position * carouselItem.offsetWidth + 'px)'"
     [style.transition]="'transform 1s ease'"
-    class="absolute flex w-full h-full items-center justify-start  ">
+    class="absolute flex w-full h-full items-center justify-start ">
         @for (letter of letter?.toArray(); track $index) {
                 <ng-container [ngTemplateOutlet]="letter.template" >
                 </ng-container>
         }
     </div>
-    
-    <div id="slider" class="absolute flex justify-between w-full">
-        @for (item of ["chevronLeft","chevronRight"]; track $index) {
+    <div  class="absolute flex justify-between w-full">
             <button 
-            class="flex  justify-center px-1 py-9 bg-slate-100/20 hover:bg-slate-100/30 cursor-pointer"
-            (click)="clickRow(item)">
-                <mat-icon [svgIcon]="item"></mat-icon>
+            class="flex justify-center px-1 py-9 bg-slate-200/40 hover:bg-slate-200/40 cursor-pointer"
+            (click)="moveLetter('left')">
+                <mat-icon class="text-black" >chevron_left</mat-icon>
             </button>
-        }       
+            <button 
+            class="flex  justify-center px-1 py-9 bg-slate-200/40 hover:bg-slate-200/40 cursor-pointer"
+            (click)="moveLetter('right')">
+                <mat-icon class="text-black" >chevron_right</mat-icon>
+            </button>
     </div>
     @if (showPosition()) {
-
         <div class="absolute top-[96%] flex gap-3 ">
             @for (item of letter; track $index) {
                 <button (click)="moveTo($index)" 

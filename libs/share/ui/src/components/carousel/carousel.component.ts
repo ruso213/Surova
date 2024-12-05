@@ -20,9 +20,10 @@ export class CarouselComponent {
   @ContentChildren(letterDirective) letter :QueryList<letterDirective>| undefined; // hace referencia a toda etiqueta que use la directiva
 
   move = input<boolean>(false)
+  rowsPositions= input<'top'|'middle'>("middle")
   showPosition = input<boolean>(true)
   position = 0;
-  touchedRow= false
+
 
   caroselRef = viewChild<ElementRef>("carousel")
   carouselItemRef = viewChild<ElementRef>("carouselItem")
@@ -35,32 +36,27 @@ export class CarouselComponent {
   onResize(event: unknown) {
     console.log("resize", event,this.caroselRef()?.nativeElement?.offsetWidth)
     const positions = this.carouselItemRef()?.nativeElement?.scrollWidth/ this.carouselItemRef()?.nativeElement.offsetWidth
+    console.log(positions);
     
 
     
-  }
-
-  clickRow(side:string){
-    this.moveLetter(side as 'chevronLeft' | "chevronRight")
-    this.touchedRow = true
   }
 
   moveLetter(side:string){
     const viewableContent= this.carouselItemRef()?.nativeElement.offsetWidth
     const fullContent = this.carouselItemRef()?.nativeElement?.scrollWidth
     const totalSwitchs = JSON.parse(fullContent)/JSON.parse(viewableContent)
-    console.log(totalSwitchs);
     
     if (this.carouselItemRef()?.nativeElement && this.letter) {
       switch(side){
-        case 'chevronRight':
+        case 'right':
           if(this.position < totalSwitchs - 1){
             this.position++
           }else{
             this.position = 0
           }
           break;
-        case 'chevronLeft':
+        case 'left':
           if(this.position > 0){
             this.position = this.position - 1
           }else{
@@ -82,7 +78,7 @@ export class CarouselComponent {
       this.moveLetter('chevronRight')
       setTimeout(()=>{
         this.contantlyMove()
-        this.touchedRow = false
+
       },10000)
     }
   }
