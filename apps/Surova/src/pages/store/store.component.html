@@ -2,7 +2,7 @@
 <div class="w-full">
     <header  Srvheader></header>
     <app-carouserl-products></app-carouserl-products>
-    <div class=" bg-white-low   h-full">
+    <div class="    h-full">
         <div class="flex flex-row w-full  h-full">
             <form class="w-3/12" (ngSubmit)="filterProductsFn()" [formGroup]="filtersForm">
                 <lib-filter-list >
@@ -15,14 +15,11 @@
 
             <div class="flex flex-col h-full w-full  gap-3  ">
 
-                <form [formGroup]="filtersForm" class="px-7 py-16   bg-white-low shadow-bottom h-12 grid grid-cols-12 sticky top-0 z-20">
-                    <lib-input formControlName="name"  class="col-span-9 shadow-perso rounded-full h-6 relative -top-5">
+                <form (ngSubmit)="search()" [formGroup]="filtersForm" class="px-7 py-16 w-1/2     h-12 grid grid-cols-12 sticky top-0 z-20">
+                    <lib-input formControlName="name"  class="col-span-9 w-  h-6 relative -top-5">
                         <div srvPreffix class="w-10 flex items-center justify-center">
-                            <mat-icon>search</mat-icon>
+                            <mat-icon class="text-slate-400">search</mat-icon>
                         </div>
-                        <button (click)="search()" srvSuffix class="w-28 cursor-pointer bg-black h-full  rounded-r-full flex items-center justify-center">
-                            <mat-icon  class="text-white scale-125">search</mat-icon>
-                        </button>
                     </lib-input>
                     <div class="col-span-3 flex flex-col items-center justify-center relative -top-5">
                         <button Srvbttn typeBttn="stroke"> 

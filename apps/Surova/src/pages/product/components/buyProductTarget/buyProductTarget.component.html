@@ -1,4 +1,4 @@
-<div class="max-h-full bg-gray-notlow p-4  flex justify-center ">
+<div class=" bg-gray-notlow p-4  flex justify-center ">
     <div class="bg-gray-50 rounded-md w-[100rem] p-5 shadow-perso flex flex-col gap-5">
 
         <div class=" border-b pb-2 xl:max-h-[36rem] 
@@ -25,12 +25,12 @@
 
             </div>
         </div>
-        <div class="h-full ">
-            <div class="h-full w-full flex flex-col gap-3 ">
-                <p class="text-2xl text-blue-500 font-light">
+        <div >
+            <div class=" w-full flex flex-col gap-3 ">
+                <p class=" px-2 text-2xl text-blue-500 font-light">
                     productos relacionados
                 </p>
-                <div class="h-[22rem] w-full">
+                <div class="h-[20rem] w-full">
                         <lib-carousel [move]="false" [showPosition]="false" [rowsPositions]="'top'" >
                             @for (item of [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,7,'nueve']; track $index) {
                                 <ng-template libItemCarousel>
@@ -48,11 +48,27 @@
                             }
                         </lib-carousel>
                 </div>
+                <div class="flex justify-end">
+                    <button class="px-2  text-blue-500 hover:underline">Ver mas</button>
+                </div>
             </div>
 
         </div>
-        <div class="h-40 w-full">
-
+        <div class="bg-white w-full flex flex-col gap-4  rounded-md p-4 shadow-md">
+            <p class="text-2xl text-blue-500 font-light">Reseñas del producto</p>
+            <div class="flex flex-col
+            ml:grid grid-cols-12
+            ">
+                <div class="col-span-7 mb-4  max-h-[30rem] ml:max-h-[50rem] overflow-scroll p-3 flex flex-col gap-8">
+                    @for (item of [1,1,1,1,1,1,1,1,1,1,1,1,1]; track $index) {
+                        <lib-comments></lib-comments>
+                    }
+                    <button class="hover:underline text-blue-500 flex justify-start">  Cargar mas</button>
+                </div>
+                <div class=" w-full md:col-span-5 border rounded-md p-4">
+                    <lib-graph></lib-graph>
+                </div>
+            </div>
         </div>
     </div>
 

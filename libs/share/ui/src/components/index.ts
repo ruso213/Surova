@@ -11,6 +11,7 @@ export * from './slider/slider.component'
 export * from './noFindProducts/noFindProducts.component'
 export * from './loading/loading.component'
 export * from './selectImage/selectImage.component'
+export * from './comments/comments.component'
 export * from './productDetails/productDetails.component'
 export * from './showProductImgs/showProductImgs.component'
-
+export * from './grafic/graph.component'

@@ -27,6 +27,8 @@ export class StoreService {
     const docRef = doc(this.db, 'products',id);
     const querySnapshot = await getDoc(docRef);
     if (querySnapshot.exists()) {
+      console.log(querySnapshot.data()['reviews']);
+      
       return querySnapshot.data()
     }else{
       return false
