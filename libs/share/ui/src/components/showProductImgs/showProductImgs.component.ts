@@ -17,8 +17,6 @@ export class ShowProductImgsComponent {
       const isImg = this.imgs()
       if (isImg) {
         this.imgClicked(isImg[0] as string)
-        console.log(isImg);
-        
       }
     })
   }

@@ -1,19 +1,19 @@
 <div class="w-full max-w-2xl md:w-full mx-auto border border-gray-300 p-4 rounded-lg bg-gray-50">
   <div class="flex items-end justify-around h-72 border-l-2 border-b-2 border-gray-800 pl-2 relative">
-    @for (bar of data; track $index) {
+    @for (bar of data(); track $index) {
       <div
         class="relative w-12 bg-orange-400 text-center text-white text-sm rounded-t-md transition-colors duration-300 hover:bg-orange-500"
-        [style.height]="bar.value + '%'"
+        [style.height]="bar.percentage + '%'"
       >
         <span class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 text-black">
-          {{ bar.value }}%
+          {{ bar.percentage + '' | slice:0:4 }}%
         </span>
       </div>
     }
   </div>
   <div class="flex justify-around mt-4">
-    @for (bar of data; track $index) {
-      <span class="w-12 text-center text-gray-600 text-sm">{{ bar.label }}
+    @for (bar of data(); track $index) {
+      <span class="w-12 text-center text-gray-600 text-sm">{{ bar.statisticName }}
       </span>
     }
   </div>

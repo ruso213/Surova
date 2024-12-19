@@ -23,24 +23,7 @@ export class CarouselComponent {
   rowsPositions= input<'top'|'middle'>("middle")
   showPosition = input<boolean>(true)
   position = 0;
-
-
-  caroselRef = viewChild<ElementRef>("carousel")
   carouselItemRef = viewChild<ElementRef>("carouselItem")
-
- 
-
-
-
-  @HostListener("window:resize", ["$event"])
-  onResize(event: unknown) {
-    console.log("resize", event,this.caroselRef()?.nativeElement?.offsetWidth)
-    const positions = this.carouselItemRef()?.nativeElement?.scrollWidth/ this.carouselItemRef()?.nativeElement.offsetWidth
-    console.log(positions);
-    
-
-    
-  }
 
   moveLetter(side:string){
     const viewableContent= this.carouselItemRef()?.nativeElement.offsetWidth
@@ -68,12 +51,10 @@ export class CarouselComponent {
   }
 
   moveTo(index: number){  
-    console.log(index);
     this.position = index
   }
 
   contantlyMove(){
-    console.log(this.move());
     if (this.move()) {
       this.moveLetter('chevronRight')
       setTimeout(()=>{

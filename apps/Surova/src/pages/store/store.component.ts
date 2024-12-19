@@ -60,8 +60,6 @@ ngOnInit(): void {
     const rateRange = [i['minRate'],i['maxRate']]
     this.filtersForm.get('price')?.setValue(priceRange)
     this.filtersForm.get('rate')?.setValue(rateRange)
-
-    this.filtersForm.valueChanges.subscribe(i => console.log(i))
   })
 }
 
@@ -78,14 +76,8 @@ ngOnInit(): void {
   }
 
   filterProductsFn(){
-    console.log('ol');
-    
     const priceRange = this.filtersForm.value.price
     const rateRange = this.filtersForm.value.rate
-    console.log(priceRange);
-    console.log(rateRange);
-    
-    
     if (priceRange && rateRange) {
       this.route.navigate([],{
         queryParams:{

@@ -1,4 +1,4 @@
 export  interface statistic{
-    statisticName:string
-    quantity:number
+    statisticName:string | number
+    percentage:number
 }

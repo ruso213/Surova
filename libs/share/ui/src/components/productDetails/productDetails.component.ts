@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '@surova/utils';
 import { RatingComponent } from '../rating/rating.component';
@@ -11,10 +11,7 @@ import { RatingComponent } from '../rating/rating.component';
   templateUrl: './productDetails.component.html',
   styleUrl: './productDetails.component.scss',
 })
-export class ProductDetailsComponent implements OnInit{
+export class ProductDetailsComponent {
   product = input<Product>()
-  ngOnInit(): void {
-      console.log(this.product());
-      
-  }
+ 
 }

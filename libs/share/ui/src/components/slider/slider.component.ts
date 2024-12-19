@@ -30,7 +30,6 @@ export class SliderComponent implements ControlValueAccessor{
   writeValue(obj: number[]): void {
     this.value =obj
     if(obj[0] == undefined) {
-      console.log(obj);
       this.value = [...this.sliderOptions()!.range]
     }
   }

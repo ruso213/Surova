@@ -3,10 +3,10 @@
         <div class="pl-1">
             <mat-icon class="scale-150 text-gray-400">account_circle</mat-icon>
         </div>
-        <p class="text-xl font-normal">{{'pepito juarez'}}</p>
+        <p class="text-xl font-normal">{{reviews()?.userName}}</p>
     </div>
     <div class="pb-3 px-2">
-        <lib-rating [rating]="3.4" [size]="1.4"></lib-rating>
-        <p>{{'son unos tenis muy comodos, el precio parece justo por la exclusividad que tienen'}}</p>
+        <lib-rating [rating]="reviews()?.rating" [size]="1.4"></lib-rating>
+        <p class="text-lg">{{reviews()?.comment}}</p>
     </div>
 </div>
