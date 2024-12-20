@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   color=input<'light' | 'dark'>('light')
   route=inject(Router)
+  quantity=input(0)
   urls=[
     {
       root:'home',

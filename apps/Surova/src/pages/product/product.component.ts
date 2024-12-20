@@ -1,15 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {   ButtonComponent, CarouselComponent, CommentsComponent, GraphComponent, HeaderComponent, letterDirective, ProductDetailsComponent, ProductTargetComponent, ShowProductImgsComponent } from '@surova/ui';
+import {   ButtonComponent, CarouselComponent, CommentsComponent, GraphComponent, letterDirective, ProductDetailsComponent, ProductTargetComponent, ShowProductImgsComponent } from '@surova/ui';
 import { ActivatedRoute } from '@angular/router';
 import { Product, statistic, statisticsGenerator, StoreService } from '@surova/utils';
-import { BuyService } from '../../services/buy.service';
+import { Cart } from '../../utils/store/cart.store';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [CommonModule, 
-    HeaderComponent, 
     ShowProductImgsComponent, 
     ProductDetailsComponent, 
     ButtonComponent, 
@@ -21,32 +21,35 @@ import { BuyService } from '../../services/buy.service';
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
+
 export class ProductComponent implements OnInit{
   activatedRoute =inject(ActivatedRoute)
   storeService =inject(StoreService)
-  buyService =inject(BuyService)
+  CartStore =inject(Cart)
   product !: Product
   graph :statistic[]=[]
   principalImg = ''
   id : null|string = ''
-  ngOnInit(): void {
-    this.id =this.activatedRoute.snapshot.paramMap.get('id')
-    if (this.id) {
-      this.storeService.getProductByID(this.id).then(i => {
-        this.product = i as Product
-        const rating = this.product.reviews.map(i => i.rating)
-        this.graph=statisticsGenerator(rating)
 
-      })
-      
-    }
+  ngOnInit(): void {
+    this.activatedRoute.params.pipe(
+      map(params => params['id'])
+    ).subscribe(id => {
+      this.id = id;
+      if (this.id) {
+        this.storeService.getProductByID(this.id).then(i => {
+          this.product = i as Product
+          const rating = this.product.reviews.map(i => i.rating)
+          this.graph=statisticsGenerator(rating)
+        }) 
+      }
+    })
 
   }
   
   addToCart(){
     if (this.id) {
-      this.buyService.addToCart(this.id)
-      
+      this.CartStore.addToCart(this.id)
     }
   }
 }

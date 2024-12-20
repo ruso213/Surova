@@ -16,6 +16,6 @@ export class ProductTargetComponent {
   product = input<Product>()
   route = inject(Router)
   buyProduct(){
-    this.route.navigate([`product/${this.product()?.id}`])
+    this.route.navigate([`product/${this.product()?.id}`],)
   }
 }

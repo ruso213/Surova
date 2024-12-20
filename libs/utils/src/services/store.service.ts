@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, query, getDocs, getDoc, doc } from '@angular/fire/firestore';
+import { Firestore, collection, query, getDocs, getDoc, doc, where } from '@angular/fire/firestore';
 import { Product } from '../interfaces/product.interface';
 
 
@@ -27,7 +27,16 @@ export class StoreService {
     const docRef = doc(this.db, 'products',id);
     const querySnapshot = await getDoc(docRef);
     if (querySnapshot.exists()) {
-      return querySnapshot.data()
+      const collectionRef = collection(this.db, 'products')
+      const q= query(collectionRef, where('principalCategory', '==', querySnapshot.data()['principalCategory']))
+      const queryCollectionSnapshot = await getDocs(q)
+      const relatedProducts:Product[] = []
+      queryCollectionSnapshot.forEach(i => relatedProducts.push({...i.data() as Product,
+        id:i.id
+      })) 
+      return {...querySnapshot.data(),
+        relatedProducts,
+      }
     }else{
       return false
     }

@@ -1,5 +1,4 @@
 <div class="  flex flex-col">
-    <header Srvheader color="dark"></header>
     <div class=" bg-gray-notlow p-4  flex justify-center ">
         <div class="bg-gray-50 rounded-md w-[100rem] p-5 shadow-perso flex flex-col gap-5">
     
@@ -34,7 +33,7 @@
                     </p>
                     <div class="h-[20rem] w-full">
                             <lib-carousel [move]="false" [showPosition]="false" [rowsPositions]="'top'" >
-                                @for (item of [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,7,'nueve']; track $index) {
+                                @for (item of product.relatedProducts; track $index) {
                                     <ng-template libItemCarousel>
                                         <div class="h-full px-2
                                         min-w-full
@@ -44,7 +43,7 @@
                                         xl:min-w-[20%] xl:w-1/5 xl:max-w-[20%]
                                         
                                         ">
-                                            <lib-product-target></lib-product-target>
+                                            <lib-product-target [product]="item"></lib-product-target>
                                         </div>
                                     </ng-template>
                                 }

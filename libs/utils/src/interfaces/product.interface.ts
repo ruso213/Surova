@@ -9,7 +9,7 @@ export interface Product {
   principalCategory: string;     // Categoría principal del producto
   productName: string;           // Nombre del producto
   rating: number;                // Valoración promedio (1 a 5)
-  relatedProducts?: string[];    // IDs o nombres de productos relacionados (opcional)
+  relatedProducts?: Product[];    // IDs o nombres de productos relacionados (opcional)
   returnPolicy: string;          // Política de devoluciones
   reviews: Review[];             // Array de reseñas de clientes
   shippingDetails: Shipping;     // Información de envío
