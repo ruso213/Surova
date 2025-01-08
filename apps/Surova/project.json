@@ -21,7 +21,8 @@
             "glob": "**/*",
             "input": "apps/Surova/public"
           },
-          "apps/Surova/src/assets/icon"
+          "apps/Surova/src/assets/icon",
+          "apps/Surova/src/assets/images"
 
         ],
         "styles": ["apps/Surova/src/styles.scss"],

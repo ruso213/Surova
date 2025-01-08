@@ -37,3 +37,4 @@ export  interface Shipping {
   estimatedDelivery: string;  // Tiempo estimado de entrega (ej: "3-5 días")
   shippingCost: number; // Costo de envío
 }
+

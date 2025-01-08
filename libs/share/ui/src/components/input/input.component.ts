@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
@@ -18,6 +18,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModu
 })
 export class InputComponent implements ControlValueAccessor {
   @Input()shadow= false 
+  placeholder= input('') 
   @Input() inputType: 'text' | 'number' | 'email' | 'password' | 'date' | 'time' | 'tel' | 'url' = 'text';
   value = ''
   

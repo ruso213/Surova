@@ -9,12 +9,26 @@ mat-icon{
 }
 
 .icon{
-    color: red;
-
+    transition: .2s;
     &.dark{
         color: white;
     }
     &.light{
         color: black;
+        &:hover{
+            color: #f97316;
+        }
     }
+}
+
+.large-icon {
+    font-size: 2rem; /* Ajusta el tamaño según tus necesidades */
+    width: 2rem;
+    height: 2rem;
+  }
+
+.surova-icon{
+    font-size: 8.5rem; /* Ajusta el tamaño según tus necesidades */
+    width: 8.5rem;
+    height: 5rem;
 }

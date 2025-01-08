@@ -1,0 +1,21 @@
+<div class="px-32 flex flex-col">
+    <div class="flex flex-col gap-5 p-5 ">
+        <div>
+            <span class="text-xl font-normal">TU CARRITO </span>
+            <span class="text-base ">({{productsInCart.length}} ARTICULOS)</span>
+        </div>
+        <div class="grid grid-cols-6 p-6 bg-white-low">
+            <div class="col-span-6  grid grid-cols-6 justify-center font-medium p-4">
+                <span class="col-span-3">Articulo</span>
+                <span>Precio</span>
+                <span>Cantidad</span>
+                <span>Total</span>
+            </div>
+            <div class="col-span-6  flex flex-col gap-3 ">
+                @for (item of productsInCart; track $index) {
+                    <lib-product-in-cart  [product]="item"></lib-product-in-cart>
+                }
+            </div>
+        </div>
+    </div>
+</div>

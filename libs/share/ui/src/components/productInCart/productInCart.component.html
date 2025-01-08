@@ -1,0 +1,25 @@
+<div class="hidden ml:grid ml:grid-cols-6 w-full h-44 bg-white  gap-1 items-center p-6">
+    <div class="col-span-3 flex gap-4 ">
+        <div class="p-1 border w-32 h-32 flex justify-center items-center ">
+            <img class="max-w-28 max-h-28" [src]="product()?.imageUrls![0]" alt="">
+        </div>
+        <div class="flex flex-col justify-between">
+            <div>
+                <p class="font-medium"> {{product()?.brand}}</p> 
+                <p>{{product()?.productName}}</p>
+            </div>
+            <div>
+                <p class="text-xs font-medium">Mensaje para regalo:</p>
+                <button class="text-xs underline decoration-dotted italic hover:text-orange-400" (click)="addGiveMessage()">Añadir:</button>
+            </div>
+        </div>
+    </div>
+    <div class="text-base font-medium h-full pt-3">
+        <p>${{product()?.price}}</p>
+    </div>
+    <div class="h-full pt-3 flex items-start">
+        <button matRipple class="border px-4 py-2" (click)="quantity('less')">-</button>
+        <span  class="border w-16 flex justify-center p-2">1</span>
+        <button matRipple class="border px-4 py-2" (click)="quantity('plus')">+</button>
+    </div>
+</div>

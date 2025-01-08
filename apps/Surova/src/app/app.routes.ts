@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { StoreComponent } from '../pages/store/store.component';
 import { ProductComponent } from '../pages/product/product.component';
+import { CartComponent } from '../pages/cart/cart.component';
 
 
 export const appRoutes: Route[] = [
@@ -11,6 +12,10 @@ export const appRoutes: Route[] = [
     {
         path:'product/:id',
         component:ProductComponent
+    },
+    {
+        path:'cart',
+        component:CartComponent
     },
     {
         path: "**",

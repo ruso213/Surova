@@ -2,33 +2,58 @@
 [class.bg-white-low]="color() == 'light'" 
 [class.bg-black]="color() == 'dark'" 
 [class.text-white]="color() == 'dark'" 
-class="h-12 sm:h-16 px-4 sm:px-10  w-full flex flex-row  items-center justify-between">
-    <div class="flex flex-row items-center gap-4">
-        <div class="flex items-center xs:hidden"> 
-            <mat-icon
-            [class.dark]="color() == 'dark'"
-             [class.light]="color() == 'light'" class="icon cursor-pointer ">menu</mat-icon>
+class=" px-32  pt-6 pb-1  w-full shadow-low">
+<div class="flex flex-col  items-center justify-between gap-2">
+    <div class="relative grid grid-cols-3 justify-items-center items-center w-full">
+        <div class="text-gray-600">
+            <lib-input [placeholder]="'Buscar en la tienda'">
+                <mat-icon srvPreffix >search</mat-icon>
+            </lib-input>
         </div>
-        <div class="flex items-center gap-3 pr-6 sm:p-0">
-            <img class="h-6 xs:h-8 cursor-pointer" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPdq8SWQqtqxSFCsFEOPxd1qwYj5uyre3Big&s" alt="">
-            <p>Surova</p>
+        <div class="">
+            <mat-icon [svgIcon]="'surova'" class="surova-icon "></mat-icon>
+        </div>
+        <div class="flex w-full gap-3">
+            <div class="cursor-default">
+                <p>¡Bienvenido!</p>
+                <div class="text-xs font-medium flex gap-1">
+                    <button matRipple matRippleColor="#f9731633" class="px-1 duration-200 hover:text-orange-600">Inicia sesion</button>
+                    <p class="font-light">o</p>
+                    <button matRipple matRippleColor="#f9731633" class="px-1 duration-200 hover:text-orange-600">Registrase</button>
+                </div>
+            </div>
+            <div class="border-l px-1">
+                <button Srvbttn class="flex items-center h-full " (click)="navigate('cart')">
+                    <mat-icon
+                    [class.dark]="color() == 'dark'" 
+                    [class.light]="color() == 'light'" class="icon cursor-pointer large-icon" >shopping_cart</mat-icon>
+                    <div class="absolute top-0 right-0 rounded-full bg-red-500 h-5 w-5 flex items-center justify-center">
+                        <p class="text-sm text-white">
+                            {{quantity()}}
+                        </p>
+                    </div>
+                </button>
+            </div>
         </div>
     </div>
-    <div class="xs:flex flex-row  hidden ">
-        @for (item of urls; track $index) {
-            <button [class.darkBttn]="color() == 'dark'" Srvbttn [typeBttn]="'none'" (click)="navigate(item.root)" >{{item.text}}</button>
+    <div class="flex flex-row items-center">
+
+        <div class="flex flex-row items-center gap-4">
+            <div class="flex items-center xs:hidden"> 
+                <mat-icon
+                [class.dark]="color() == 'dark'"
+                [class.light]="color() == 'light'" class="icon cursor-pointer ">menu</mat-icon>
+            </div>
             
-        }
-    </div>
-    <button Srvbttn class="flex items-center relative h-full">
-        <mat-icon
-        [class.dark]="color() == 'dark'" 
-        [class.light]="color() == 'light'" class="icon cursor-pointer " >shopping_cart</mat-icon>
-        <div class="absolute top-2 right-0 rounded-full bg-red-500 h-5 w-5 flex items-center justify-center">
-           <p class="text-base text-white">
-               {{quantity()}}
-           </p>
         </div>
-    </button>
+        <div class="flex flex-row   ">
+            @for (item of urls; track $index) {
+                <button class="font-medium text-sm" [class.darkBttn]="color() == 'dark'" Srvbttn [typeBttn]="'none'" (click)="navigate(item.root)" >{{item.text | uppercase}}</button>
+                
+            }
+        </div>
+       
+    </div>
+</div>
 
 </header>

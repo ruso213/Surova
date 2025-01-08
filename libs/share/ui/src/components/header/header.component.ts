@@ -1,14 +1,16 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import {  MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { InputComponent } from "../input/input.component";
+import { MatRipple } from '@angular/material/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'header[Srvheader]',
   standalone: true,
-  imports: [CommonModule,ButtonComponent, MatIconModule],
+  imports: [CommonModule, ButtonComponent, MatIconModule, InputComponent, MatRipple],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -23,15 +25,15 @@ export class HeaderComponent {
     },
     {
       root:'top-sellest',
-      text:'Lo mas vendido'
+      text:'superventas'
     },
     {
       root:'promotions',
-      text:'Promociones'
+      text:'ofertas'
     },
     {
       root:'new-products',
-      text:'Nuevos productos'
+      text:'novedades'
     },
   ]
 

@@ -1,4 +1,4 @@
-import {  Component,ContentChildren,Directive, ElementRef, HostListener, input, QueryList, TemplateRef, viewChild} from '@angular/core';
+import {  Component,ContentChildren,Directive, ElementRef, HostListener, input, OnInit, QueryList, TemplateRef, viewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule} from '@angular/material/icon';
 
@@ -15,7 +15,7 @@ export class letterDirective{
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
-export class CarouselComponent {
+export class CarouselComponent implements OnInit{
   
   @ContentChildren(letterDirective) letter :QueryList<letterDirective>| undefined; // hace referencia a toda etiqueta que use la directiva
 
@@ -25,6 +25,9 @@ export class CarouselComponent {
   position = 0;
   carouselItemRef = viewChild<ElementRef>("carouselItem")
 
+  ngOnInit(): void {
+      this.contantlyMove()
+  }
   moveLetter(side:string){
     const viewableContent= this.carouselItemRef()?.nativeElement.offsetWidth
     const fullContent = this.carouselItemRef()?.nativeElement?.scrollWidth
@@ -56,11 +59,13 @@ export class CarouselComponent {
 
   contantlyMove(){
     if (this.move()) {
-      this.moveLetter('chevronRight')
+      console.log('oa');
+      
+      this.moveLetter('right')
       setTimeout(()=>{
         this.contantlyMove()
 
-      },10000)
+      },5000)
     }
   }
 }

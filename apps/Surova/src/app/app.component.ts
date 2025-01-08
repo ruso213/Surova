@@ -19,7 +19,8 @@ export class AppComponent implements OnInit{
     "chevronLeft",
     "chevronRight",
     "search",
-    "progressActivity"
+    "progressActivity",
+    "surova"
   ]
   productsStore = inject(ProductsStore)
 
