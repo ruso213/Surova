@@ -1,5 +1,5 @@
-<div class="hidden ml:grid ml:grid-cols-6 w-full h-44 bg-white  gap-1 items-center p-6">
-    <div class="col-span-3 flex gap-4 ">
+<div class="hidden ml:grid ml:grid-cols-12 w-full h-44 bg-white  gap-1 items-center p-6">
+    <div class="col-span-6 flex gap-4 ">
         <div class="p-1 border w-32 h-32 flex justify-center items-center ">
             <img class="max-w-28 max-h-28" [src]="product()?.imageUrls![0]" alt="">
         </div>
@@ -14,12 +14,20 @@
             </div>
         </div>
     </div>
-    <div class="text-base font-medium h-full pt-3">
+    <div class="col-span-2 text-base font-light h-full pt-3">
         <p>${{product()?.price}}</p>
     </div>
-    <div class="h-full pt-3 flex items-start">
-        <button matRipple class="border px-4 py-2" (click)="quantity('less')">-</button>
-        <span  class="border w-16 flex justify-center p-2">1</span>
-        <button matRipple class="border px-4 py-2" (click)="quantity('plus')">+</button>
+    <div class="col-span-2 h-full pt-3 flex items-start">
+        <button matRipple class="border px-4 py-2" (click)="emitQuantity('less')">-</button>
+        <span  class="border border-x-0 w-16 flex justify-center p-2">{{quantity}}</span>
+        <button matRipple class="border px-4 py-2" (click)="emitQuantity('plus')">+</button>
+    </div>
+    <div class="col-span-1 text-base font-light h-full pt-3">
+        <p>${{totalPrice}}</p>
+    </div>
+    <div class="flex justify-center">
+        <button (click)="deleteProduct()" matRipple class="flex justify-center p-2 rounded-md" [matRippleColor]="'#ef444450'">
+            <mat-icon class="text-red-500">close</mat-icon>
+        </button>
     </div>
 </div>

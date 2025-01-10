@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { Cart } from '../store/cart.store';
+import { User } from '../store/user.store';
 
 
 @Injectable({
@@ -8,6 +8,6 @@ import { Cart } from '../store/cart.store';
 })
 export class BuyService {
   auth = inject(Auth)
-  cartStore = inject(Cart)
+  UserStore = inject(User)
   
 }

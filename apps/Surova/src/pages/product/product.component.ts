@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {   ButtonComponent, CarouselComponent, CommentsComponent, GraphComponent, letterDirective, ProductDetailsComponent, ProductTargetComponent, ShowProductImgsComponent } from '@surova/ui';
 import { ActivatedRoute } from '@angular/router';
 import { Product, statistic, statisticsGenerator, StoreService } from '@surova/utils';
-import { Cart } from '../../utils/store/cart.store';
+import { User } from '../../utils/store/user.store';
 import { map } from 'rxjs';
 
 @Component({
@@ -25,7 +25,7 @@ import { map } from 'rxjs';
 export class ProductComponent implements OnInit{
   activatedRoute =inject(ActivatedRoute)
   storeService =inject(StoreService)
-  CartStore =inject(Cart)
+  UserStore =inject(User)
   product !: Product
   graph :statistic[]=[]
   principalImg = ''
@@ -49,7 +49,7 @@ export class ProductComponent implements OnInit{
   
   addToCart(){
     if (this.id) {
-      this.CartStore.addToCart(this.id)
+      this.UserStore.addToCart(this.id)
     }
   }
 }

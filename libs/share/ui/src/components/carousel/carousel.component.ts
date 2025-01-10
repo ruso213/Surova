@@ -59,8 +59,6 @@ export class CarouselComponent implements OnInit{
 
   contantlyMove(){
     if (this.move()) {
-      console.log('oa');
-      
       this.moveLetter('right')
       setTimeout(()=>{
         this.contantlyMove()

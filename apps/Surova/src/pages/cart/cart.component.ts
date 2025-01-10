@@ -1,8 +1,8 @@
 import { Component, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductInCartComponent } from '@surova/ui';
-import { Cart } from '../../utils/store/cart.store';
-import { Product, StoreService } from '@surova/utils';
+import { User } from '../../utils/store/user.store';
+import { StoreService,ProductInCart } from '@surova/utils';
 
 @Component({
   selector: 'app-cart',
@@ -12,15 +12,24 @@ import { Product, StoreService } from '@surova/utils';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  cart = inject(Cart)
+  user = inject(User)
   store= inject(StoreService)
-  productsInCart:Product[] =[]
+  productsInCart:ProductInCart[] =[]
   constructor(){
     effect(()=>{
-      const productId= this.cart.productsInCart()
-      productId.forEach(id => {
-        this.store.getProductByID(id).then(product => this.productsInCart.push(product as Product))
-      })
+      const productId= this.user.productsInCart()
+      productId.forEach(item => {
+        this.store.getProductByID(item['id']).then(product => {
+          this.productsInCart.push({...product,
+            quantity:item['quantity'] as number, 
+            id: item['id'] as string} as ProductInCart
+          )})
+          
+        })
     })
+  }
+
+  quantity(evt:{id: string, quantity:'plus'|'less'}){
+    this.user.quantityOfProduct(evt)
   }
 }

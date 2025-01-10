@@ -13,7 +13,7 @@
             </div>
             <div class="col-span-6  flex flex-col gap-3 ">
                 @for (item of productsInCart; track $index) {
-                    <lib-product-in-cart  [product]="item"></lib-product-in-cart>
+                    <lib-product-in-cart (quantityEvt)="quantity($event)" [product]="item"></lib-product-in-cart>
                 }
             </div>
         </div>

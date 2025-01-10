@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ProductsStore} from '@surova/utils';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '@surova/ui';
-import { Cart } from '../utils/store/cart.store';
+import { User } from '../utils/store/user.store';
 @Component({
   standalone: true,
   imports: [RouterOutlet, HeaderComponent],
@@ -14,7 +14,7 @@ import { Cart } from '../utils/store/cart.store';
 })
 export class AppComponent implements OnInit{
   title = 'Surova';
-  cart = inject(Cart);
+  user = inject(User);
   iconToRegister = [
     "chevronLeft",
     "chevronRight",
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.productsStore.loadData()
-    this.cart.loadCart()
+    this.user.loadCart()
   }
 
   constructor(
