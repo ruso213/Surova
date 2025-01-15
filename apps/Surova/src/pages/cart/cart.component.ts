@@ -18,15 +18,19 @@ export class CartComponent {
   constructor(){
     effect(()=>{
       const productId= this.user.productsInCart()
+      this.productsInCart = []
       productId.forEach(item => {
         this.store.getProductByID(item['id']).then(product => {
           this.productsInCart.push({...product,
-            quantity:item['quantity'] as number, 
-            id: item['id'] as string} as ProductInCart
+            quantity:item['quantity'], 
+            id: item['id'] } as ProductInCart
           )})
-          
         })
     })
+  }
+
+  deletePr(id:string){
+    this.user.deleteToCart(id)
   }
 
   quantity(evt:{id: string, quantity:'plus'|'less'}){

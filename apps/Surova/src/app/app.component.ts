@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ProductsStore} from '@surova/utils';
@@ -15,6 +15,7 @@ import { User } from '../utils/store/user.store';
 export class AppComponent implements OnInit{
   title = 'Surova';
   user = inject(User);
+  quantity = 0
   iconToRegister = [
     "chevronLeft",
     "chevronRight",
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit{
     "surova"
   ]
   productsStore = inject(ProductsStore)
-
+ 
   ngOnInit(): void {
     this.productsStore.loadData()
     this.user.loadCart()
@@ -33,6 +34,9 @@ export class AppComponent implements OnInit{
     private readonly matIconRegistry: MatIconRegistry,
     private readonly domSanitizer: DomSanitizer,
   ){
+    effect(()=>{
+      this.user.productsInCart()
+    })
     this.iconToRegister.forEach(icon =>{
       this.matIconRegistry.addSvgIcon(icon,this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icon/${icon}.svg`))
     })

@@ -19,6 +19,7 @@ interface EmitedValue{
 export class ProductInCartComponent implements OnInit{
   product = input<ProductInCart>()
   quantityEvt = output<EmitedValue>()
+  deletePr = output<string>()
   quantity = 0
   totalPrice =0
   ngOnInit(): void {
@@ -31,8 +32,7 @@ export class ProductInCartComponent implements OnInit{
   }
 
   deleteProduct(){
-    console.log('borrando ', this.product()?.id);
-    
+    this.deletePr.emit(this.product()?.id as string)
   }
 
   emitQuantity(param: 'plus'| 'less'){

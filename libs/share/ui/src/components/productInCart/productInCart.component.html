@@ -1,4 +1,4 @@
-<div class="hidden ml:grid ml:grid-cols-12 w-full h-44 bg-white  gap-1 items-center p-6">
+<div class="hidden md:grid grid-cols-12 w-full h-44 bg-white  gap-1 items-center ">
     <div class="col-span-6 flex gap-4 ">
         <div class="p-1 border w-32 h-32 flex justify-center items-center ">
             <img class="max-w-28 max-h-28" [src]="product()?.imageUrls![0]" alt="">
@@ -28,6 +28,47 @@
     <div class="flex justify-center">
         <button (click)="deleteProduct()" matRipple class="flex justify-center p-2 rounded-md" [matRippleColor]="'#ef444450'">
             <mat-icon class="text-red-500">close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div class="flex flex-col gap-4 py-4 md:hidden border-b">
+    <div class="flex gap-6">
+        <div class="p-1 border rounded-md w-32 h-32 flex justify-center items-center ">
+            <img class="max-w-28 max-h-28" [src]="product()?.imageUrls![0]" alt="">
+        </div>
+        <div class="flex flex-col gap-8">
+            <div>
+                <p class="font-normal text-sm"> {{product()?.brand}}</p> 
+                <p class="text-xs">{{product()?.productName}}</p>
+            </div>
+            <div>
+                <p class="text-xs font-medium">Mensaje para regalo:</p>
+                <button class="text-xs underline decoration-dotted italic hover:text-orange-400" (click)="addGiveMessage()">Añadir:</button>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col gap-3 justify-center ">
+        <div class="flex items-center justify-between">
+            <p class="text-xs font-medium">Precio</p>
+            <p class="text-sm">${{product()?.price}}</p>
+        </div>
+        <div class="flex items-center justify-between">
+            <p class="text-xs font-medium">Cantidad</p>
+            <div class="col-span-2 h-full flex items-start">
+                <button matRipple class="border px-4 py-2" (click)="emitQuantity('less')">-</button>
+                <span  class="border border-x-0 w-16 flex justify-center p-2">{{quantity}}</span>
+                <button matRipple class="border px-4 py-2" (click)="emitQuantity('plus')">+</button>
+            </div>        </div>
+        <div class="flex items-center justify-between">
+            <p class="text-xs font-medium">Total</p>
+            <p class="text-sm">${{totalPrice}}</p>
+        </div>
+    </div>
+    <div class="flex justify-end">
+        <button (click)="deleteProduct()" matRipple class="flex justify-center items-center py-2 rounded-md" [matRippleColor]="'#ef444450'">
+            <mat-icon class="text-red-500 text-md">close</mat-icon>
+            <p class="text-red-500 text-xs">Eliminar</p>
         </button>
     </div>
 </div>

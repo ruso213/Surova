@@ -1,11 +1,11 @@
-<div class="px-32 flex flex-col">
-    <div class="flex flex-col gap-5 p-5 ">
+<div class="lg:px-20 xl:px-32 flex flex-col gap-12 p-5">
+    <div class="flex flex-col gap-5 ">
         <div>
             <span class="text-xl font-normal">TU CARRITO </span>
             <span class="text-base ">({{productsInCart.length}} ARTICULOS)</span>
         </div>
-        <div class="grid grid-cols-6 p-6 bg-white-low">
-            <div class="col-span-6  grid grid-cols-6 justify-center font-medium p-4">
+        <div class=" md:grid grid-cols-6 md:bg-white-low md:p-6">
+            <div class="hidden col-span-6  md:grid grid-cols-6 justify-center font-medium pb-2">
                 <span class="col-span-3">Articulo</span>
                 <span>Precio</span>
                 <span>Cantidad</span>
@@ -13,9 +13,23 @@
             </div>
             <div class="col-span-6  flex flex-col gap-3 ">
                 @for (item of productsInCart; track $index) {
-                    <lib-product-in-cart (quantityEvt)="quantity($event)" [product]="item"></lib-product-in-cart>
+                    <lib-product-in-cart (quantityEvt)="quantity($event)" (deletePr)="deletePr($event)" [product]="item"></lib-product-in-cart>
                 }
             </div>
         </div>
+    </div>
+    <div class="flex flex-col gap-4">
+        <div class="flex flex-col justify-center gap-2">
+            <div class="border-b pb-2 flex justify-between">
+                <p class="text-sm font-medium">Subtotal:</p>
+                <p class="font-medium">${{10000}}</p>
+            </div>
+            <div class="flex justify-between">
+                <p class="text-sm font-medium">Total:</p>
+                <p class="font-medium">${{10000}}</p>
+            </div>
+        </div>
+        <button class="w-full p-4 
+        flex justify-center bg-black hover:bg-orange-400 rounded-md text-xl font-medium text-white duration-200">Proceso de pago</button>
     </div>
 </div>

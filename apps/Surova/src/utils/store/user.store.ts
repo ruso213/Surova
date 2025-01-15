@@ -1,4 +1,3 @@
-
 import { computed, inject } from "@angular/core";
 import { Auth } from "@angular/fire/auth";
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
@@ -7,8 +6,11 @@ interface ProductsInCart{
     id:string,
     quantity:number
 }
-
-const initialState = {
+interface InitialState{
+    user:'',
+    productsInCart : ProductsInCart[]
+}
+const initialState:InitialState = {
     user:'',
     productsInCart : []
 }
@@ -16,8 +18,8 @@ function addToLocalStorage(id:string, auth: Auth){
     if (auth.currentUser) {
         console.log('esta logeado ponle el producto ', id);
     }else{
+        console.log('addToLocalStorage');
         const storageCart=localStorage.getItem('cart')
-        console.log(storageCart);
         if(storageCart){
             const localStorageCart:ProductsInCart[] = JSON.parse(storageCart)
             if (localStorageCart) {
@@ -32,9 +34,9 @@ function addToLocalStorage(id:string, auth: Auth){
                 quantity:1
             }]))
           }
-          console.log(JSON.parse(storageCart));
           
-          return JSON.parse(storageCart)
+
+          return JSON.parse(localStorage.getItem('cart')!)
         }else{
             localStorage.setItem('cart',JSON.stringify([{id,quantity:1}]))
             
@@ -42,13 +44,34 @@ function addToLocalStorage(id:string, auth: Auth){
       }
 
 }
+
+function deleteToLocalStorage(id:string, auth:Auth){
+    if(auth.currentUser){
+        console.log('elimina el producto de firebase');
+        return []
+    }else{
+        const productsOfLocalStorage = JSON.parse(localStorage.getItem('cart') as string) as ProductsInCart[]
+        const update :ProductsInCart[] = productsOfLocalStorage.filter(i => i.id != id)
+        localStorage.setItem('cart', JSON.stringify(update))
+        return update
+    }
+}
+
 export const User = signalStore(
     {providedIn: 'root'},
     withState(initialState),
     withMethods((store, auth = inject(Auth)) =>({
-        addToCart(id:string){
+        addToCart(id:string){            
             patchState(store, {productsInCart:addToLocalStorage(id, auth)})
+            console.log(store.productsInCart());
+            console.log(store.productsInCart());
+            console.log(store.productsInCart());
+            console.log(store.productsInCart());
+            
             return store.productsInCart()
+        },
+        deleteToCart(id:string){
+            patchState(store, {productsInCart:deleteToLocalStorage(id, auth)})
         },
         loadCart(){
             const localStorageCart = localStorage.getItem('cart')
