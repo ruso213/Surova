@@ -38,7 +38,7 @@ export class StoreService {
         relatedProducts,
       }
     }else{
-      return false
+      return {...querySnapshot.data()}
     }
   }
   

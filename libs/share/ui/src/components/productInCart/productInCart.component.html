@@ -23,7 +23,7 @@
         <button matRipple class="border px-4 py-2" (click)="emitQuantity('plus')">+</button>
     </div>
     <div class="col-span-1 text-base font-light h-full pt-3">
-        <p>${{totalPrice}}</p>
+        <p>${{product()?.totalPrice}}</p>
     </div>
     <div class="flex justify-center">
         <button (click)="deleteProduct()" matRipple class="flex justify-center p-2 rounded-md" [matRippleColor]="'#ef444450'">

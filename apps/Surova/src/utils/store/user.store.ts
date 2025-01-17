@@ -63,11 +63,6 @@ export const User = signalStore(
     withMethods((store, auth = inject(Auth)) =>({
         addToCart(id:string){            
             patchState(store, {productsInCart:addToLocalStorage(id, auth)})
-            console.log(store.productsInCart());
-            console.log(store.productsInCart());
-            console.log(store.productsInCart());
-            console.log(store.productsInCart());
-            
             return store.productsInCart()
         },
         deleteToCart(id:string){
@@ -84,7 +79,6 @@ export const User = signalStore(
             return store.productsInCart()
         },
         quantityOfProduct(evt:{id: string, quantity:'plus'|'less'}){
-            console.log(evt.id);
             const cart: ProductsInCart[] =store.productsInCart() 
             const product = cart.find(i => i['id'] == evt.id)
             if (!product?.quantity) {
@@ -92,10 +86,17 @@ export const User = signalStore(
             }
             if (evt.quantity == 'plus') {
                 product.quantity++
+                localStorage.setItem('cart', JSON.stringify( store.productsInCart()))  
+                const localStorageCart = localStorage.getItem('cart')
+                if(localStorageCart)
+                patchState(store,{productsInCart:JSON.parse(localStorageCart)})
             }else if(evt.quantity == 'less' && product.quantity >1){
                 product.quantity-- 
+                localStorage.setItem('cart', JSON.stringify( store.productsInCart()))  
+                const localStorageCart = localStorage.getItem('cart')
+                if(localStorageCart)
+                patchState(store,{productsInCart:JSON.parse(localStorageCart)})
             }
-            localStorage.setItem('cart', JSON.stringify( store.productsInCart()))   
         },
     })),
     withComputed((state) =>({
